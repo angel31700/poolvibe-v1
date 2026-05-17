@@ -703,20 +703,49 @@
 </footer>
 
 <script>
-  document.getElementById('betaForm').addEventListener('submit', function(e) {
+  document.getElementById('betaForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const data = {
-      name:        document.getElementById('fname').value,
-      email:       document.getElementById('femail').value,
-      state:       document.getElementById('fstate').value,
-      pooltype:    document.getElementById('fpooltype').value,
-      ownership:   document.getElementById('fown').value,
-      frustration: document.getElementById('ffrustration').value,
-      submitted_at: new Date().toISOString()
-    };
-    console.log('Beta signup:', data);
-    document.getElementById('betaForm').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
+    const btn = this.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const email       = document.getElementById('femail').value.trim();
+    const firstName   = document.getElementById('fname').value.trim().split(' ')[0];
+    const state       = document.getElementById('fstate').value.trim();
+    const pooltype    = document.getElementById('fpooltype').value;
+    const ownership   = document.getElementById('fown').value;
+    const frustration = document.getElementById('ffrustration').value.trim();
+
+    try {
+      // Subscribe via Kit (ConvertKit) v3 API — tag: PoolVibe Beta (id 19625998)
+      const res = await fetch('https://api.convertkit.com/v3/tags/19625998/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: 'mXBZjlgTpA5h-M1oB2Ztxg',
+          email: email,
+          first_name: firstName,
+          fields: {
+            state: state,
+            pool_type: pooltype,
+            ownership: ownership,
+            biggest_frustration: frustration
+          },
+          tags: [19625998]
+        })
+      });
+
+      if (res.ok) {
+        document.getElementById('betaForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        throw new Error('API error ' + res.status);
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Join the Beta →';
+      alert('Something went wrong — please try again or email hello@pool-vibe.com');
+    }
   });
 </script>
 </body>
