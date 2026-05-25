@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PoolVibe App Screens</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1a2e; font-family: 'Segoe UI', sans-serif; display: flex; gap: 32px; padding: 40px; justify-content: center; flex-wrap: wrap; }
+
+  .phone {
+    width: 320px;
+    height: 640px;
+    background: #0A1628;
+    border-radius: 40px;
+    border: 6px solid #222;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    flex-shrink: 0;
+  }
+  .screen-label {
+    color: #fff;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 13px;
+    opacity: 0.6;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .phone-wrap { display: flex; flex-direction: column; align-items: center; }
+
+  /* ── LOGIN ── */
+  .login-bg {
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, #0d2a4a 0%, #0A1628 60%, #051020 100%);
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 28px 24px;
+  }
+  .water-overlay {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(0,196,204,0.04) 0px, rgba(0,196,204,0.04) 2px,
+      transparent 2px, transparent 18px
+    );
+    pointer-events: none;
+  }
+  .logo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 28px; z-index:1; }
+  .logo-img { width: 72px; height: 72px; object-fit: contain; border-radius: 16px; }
+  .app-name { color: #fff; font-size: 28px; font-weight: 800; letter-spacing: 1.5px; margin-top: 8px; }
+  .tagline  { color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 4px; }
+  .input-field {
+    width: 100%; background: rgba(255,255,255,0.92); border-radius: 10px;
+    padding: 12px 14px 12px 40px; font-size: 14px; color: #333;
+    margin-bottom: 12px; position: relative; z-index:1;
+    display: flex; align-items: center;
+  }
+  .input-icon { position: absolute; left: 14px; color: #00C4CC; font-size: 16px; z-index:2; }
+  .input-wrap { position: relative; width: 100%; }
+  .forgot { color: #00C4CC; font-size: 12px; font-weight: 700; text-align: right; width: 100%; margin-bottom: 20px; z-index:1; }
+  .btn-signin {
+    width: 100%; background: #00C4CC; color: #fff; font-size: 16px; font-weight: 800;
+    padding: 14px; border-radius: 12px; text-align: center; z-index:1; letter-spacing: 0.5px;
+  }
+  .register-row { color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 20px; z-index:1; }
+  .register-row span { color: #00C4CC; font-weight: 700; }
+
+  /* ── ONBOARDING ── */
+  .onboard-bg {
+    width: 100%; height: 100%;
+    background: linear-gradient(180deg, #0A1628 0%, #1A3A5C 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 28px 28px 80px;
+    position: relative;
+  }
+  .ob-logo { width: 70px; height: 70px; object-fit: contain; margin-bottom: 12px; }
+  .ob-appname { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: 1.2px; }
+  .ob-title { color: #fff; font-size: 22px; font-weight: 700; margin-top: 24px; text-align: center; }
+  .ob-desc  { color: rgba(255,255,255,0.65); font-size: 14px; text-align: center; margin-top: 12px; line-height: 1.6; }
+  .ob-dots  { display: flex; gap: 8px; position: absolute; bottom: 48px; }
+  .dot { width: 8px; height: 8px; background: rgba(255,255,255,0.25); border-radius: 50%; }
+  .dot.active { width: 28px; background: #00C4CC; border-radius: 4px; }
+  .ob-nav { position: absolute; bottom: 32px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 24px; }
+  .ob-nav-btn { color: rgba(255,255,255,0.4); font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+  .ob-nav-btn.active { color: #00C4CC; }
+
+  /* ── HOME FEED ── */
+  .home-bg {
+    width: 100%; height: 100%;
+    background: #F0F8FF;
+    display: flex; flex-direction: column;
+  }
+  .appbar {
+    background: #0A1628; display: flex; align-items: center; justify-content: center;
+    padding: 14px 16px; gap: 8px;
+  }
+  .appbar-logo { width: 26px; height: 26px; object-fit: contain; }
+  .appbar-title { color: #fff; font-size: 18px; font-weight: 800; letter-spacing: 0.8px; }
+  .feed-body { flex: 1; overflow: hidden; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .welcome-txt { font-size: 17px; font-weight: 700; color: #0A1628; }
+  .card {
+    background: #fff; border-radius: 12px; padding: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .avatar { width: 36px; height: 36px; border-radius: 50%; background: #00C4CC; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+  .card-user { font-size: 13px; font-weight: 700; color: #0A1628; }
+  .card-time { font-size: 11px; color: #aaa; }
+  .card-text { font-size: 13px; color: #444; line-height: 1.5; }
+  .card-tag  { display: inline-block; background: rgba(0,196,204,0.12); color: #00C4CC; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; margin-top: 8px; }
+  .bottom-nav {
+    background: #0A1628; display: flex; justify-content: space-around;
+    padding: 10px 0 6px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; flex: 1; }
+  .nav-icon { font-size: 20px; }
+  .nav-label { font-size: 9px; font-weight: 600; letter-spacing: 0.3px; }
+  .nav-item.active .nav-label, .nav-item.active .nav-icon { color: #00C4CC; }
+  .nav-item:not(.active) .nav-label, .nav-item:not(.active) .nav-icon { color: rgba(255,255,255,0.35); }
+
+  /* ── SHOP ── */
+  .shop-bg { width:100%; height:100%; background:#F0F8FF; display:flex; flex-direction:column; }
+  .tabs { display:flex; background:#fff; border-bottom:1px solid #eee; }
+  .tab { flex:1; text-align:center; padding:12px 0; font-size:12px; font-weight:700; letter-spacing:0.8px; color:#aaa; }
+  .tab.active { color:#00C4CC; border-bottom:2px solid #00C4CC; }
+  .shop-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:12px; }
+  .product-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.07); }
+  .product-img { width:100%; height:80px; background:linear-gradient(135deg,#0A1628,#1A3A5C); display:flex; align-items:center; justify-content:center; font-size:28px; }
+  .product-info { padding:8px; }
+  .product-name { font-size:11px; font-weight:700; color:#0A1628; }
+  .product-brand { font-size:10px; color:#aaa; margin-top:2px; }
+  .product-price { font-size:13px; font-weight:800; color:#00C4CC; margin-top:4px; }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: LOGIN -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="login-bg">
+      <div class="water-overlay"></div>
+      <div class="logo-wrap">
+        <img src="https://pool-vibe.com/logo.png" class="logo-img" onerror="this.style.background='#00C4CC';this.style.borderRadius='12px'" />
+        <div class="app-name">PoolVibe</div>
+        <div class="tagline">Ready to dive in?</div>
+      </div>
+      <div class="input-wrap">
+        <span class="input-icon">✉</span>
+        <div class="input-field" style="padding-left:36px; color:#888;">Email</div>
+      </div>
+      <div class="input-wrap">
+        <span class="input-icon">🔒</span>
+        <div class="input-field" style="padding-left:36px; color:#888;">Password</div>
+      </div>
+      <div class="forgot">Forgot Password?</div>
+      <div class="btn-signin">Sign In</div>
+      <div class="register-row">Not a member? <span>Register now</span></div>
+    </div>
+  </div>
+  <div class="screen-label">Login</div>
+</div>
+
+<!-- SCREEN 2: ONBOARDING SLIDE 1 -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="onboard-bg">
+      <img src="https://pool-vibe.com/logo.png" class="ob-logo" onerror="this.style.background='#00C4CC';this.style.borderRadius='12px'" />
+      <div class="ob-appname">PoolVibe</div>
+      <div class="ob-title">Find Pros Near You</div>
+      <div class="ob-desc">Discover top-rated pool builders and service professionals in your area.</div>
+      <div class="ob-nav">
+        <span class="ob-nav-btn">SKIP</span>
+        <span class="ob-nav-btn active">NEXT</span>
+      </div>
+      <div class="ob-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Onboarding</div>
+</div>
+
+<!-- SCREEN 3: HOME FEED -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="home-bg">
+      <div class="appbar">
+        <img src="https://pool-vibe.com/logo.png" class="appbar-logo" onerror="this.style.display='none'" />
+        <span class="appbar-title">PoolVibe</span>
+      </div>
+      <div class="feed-body">
+        <div class="welcome-txt">Welcome, Angela! 👋</div>
+        <div class="card">
+          <div class="card-header">
+            <div class="avatar">JD</div>
+            <div>
+              <div class="card-user">Jason D.</div>
+              <div class="card-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="card-text">Anyone have recommendations for a good pool heater under $800? Mine just died after 6 years.</div>
+          <span class="card-tag">Equipment & Tech</span>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="avatar" style="background:#1A3A5C;">SR</div>
+            <div>
+              <div class="card-user">Sara R.</div>
+              <div class="card-time">5 hours ago</div>
+            </div>
+          </div>
+          <div class="card-text">Finally got the algae under control after 3 weeks. Shock + algaecide combo worked 🙌</div>
+          <span class="card-tag">Maintenance & Chemistry</span>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="avatar" style="background:#FFD700; color:#0A1628;">MP</div>
+            <div>
+              <div class="card-user">Mike's Pool Co.</div>
+              <div class="card-time">Yesterday</div>
+            </div>
+          </div>
+          <div class="card-text">Just finished this resort-style renovation in Scottsdale. Swipe to see the before! 🏊</div>
+          <span class="card-tag">Inspiration & Showcase</span>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item active">
+          <div class="nav-icon">🏠</div>
+          <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">👥</div>
+          <div class="nav-label">Community</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">🛒</div>
+          <div class="nav-label">Shop</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">💬</div>
+          <div class="nav-label">Messages</div>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">☰</div>
+          <div class="nav-label">Menu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Home Feed</div>
+</div>
+
+<!-- SCREEN 4: SHOP -->
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="shop-bg">
+      <div class="appbar">
+        <img src="https://pool-vibe.com/logo.png" class="appbar-logo" onerror="this.style.display='none'" />
+        <span class="appbar-title">Shop</span>
+      </div>
+      <div class="tabs">
+        <div class="tab active">PRODUCTS</div>
+        <div class="tab">SERVICES</div>
+      </div>
+      <div class="shop-grid">
+        <div class="product-card">
+          <div class="product-img">🧪</div>
+          <div class="product-info">
+            <div class="product-name">3-in-1 Test Kit</div>
+            <div class="product-brand">Taylor</div>
+            <div class="product-price">$24.99</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">⚙️</div>
+          <div class="product-info">
+            <div class="product-name">Variable Speed Pump</div>
+            <div class="product-brand">Pentair</div>
+            <div class="product-price">$649.00</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🦠</div>
+          <div class="product-info">
+            <div class="product-name">Algaecide 60</div>
+            <div class="product-brand">BioGuard</div>
+            <div class="product-price">$18.49</div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-img">🌡️</div>
+          <div class="product-info">
+            <div class="product-name">Gas Heater</div>
+            <div class="product-brand">Hayward</div>
+            <div class="product-price">$799.00</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><div class="nav-icon">🏠</div><div class="nav-label">Home</div></div>
+        <div class="nav-item"><div class="nav-icon">👥</div><div class="nav-label">Community</div></div>
+        <div class="nav-item active"><div class="nav-icon">🛒</div><div class="nav-label">Shop</div></div>
+        <div class="nav-item"><div class="nav-icon">💬</div><div class="nav-label">Messages</div></div>
+        <div class="nav-item"><div class="nav-icon">☰</div><div class="nav-label">Menu</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-label">Shop</div>
+</div>
+
+</body>
+</html>

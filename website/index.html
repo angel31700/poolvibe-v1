@@ -717,21 +717,23 @@
     const frustration = document.getElementById('ffrustration').value.trim();
 
     try {
-      // Subscribe via Kit (ConvertKit) v3 API — tag: PoolVibe Beta (id 19625998)
-      const res = await fetch('https://api.convertkit.com/v3/tags/19625998/subscribe', {
+      // Subscribe via Kit v4 API — tag: PoolVibe Beta (id 19625998)
+      const res = await fetch('https://api.kit.com/v4/subscribers', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Kit-Api-Key': 'kit_f4a5279d2b2b75bdc5c0bf3d47e04bf3'
+        },
         body: JSON.stringify({
-          api_key: 'mXBZjlgTpA5h-M1oB2Ztxg',
-          email: email,
+          email_address: email,
           first_name: firstName,
+          tag_ids: [19625998],
           fields: {
             state: state,
             pool_type: pooltype,
             ownership: ownership,
             biggest_frustration: frustration
-          },
-          tags: [19625998]
+          }
         })
       });
 
