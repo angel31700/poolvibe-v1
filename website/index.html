@@ -3,744 +3,1005 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PoolVibe — Know exactly what your pool needs</title>
-  <meta name="description" content="PoolVibe helps pool owners get exact chemical guidance, smarter product recommendations, and catch when their maintenance company is getting it wrong." />
-  <meta property="og:title" content="PoolVibe — Know exactly what your pool needs" />
-  <meta property="og:description" content="Stop guessing. Get exact dosing from your test results, photos, and maintenance reports." />
+  <title>PoolVibe — Stop guessing. Start knowing.</title>
+  <meta name="description" content="PoolVibe gives pool owners exact chemical guidance, smarter product recommendations, and catches when their maintenance company is getting it wrong." />
+  <meta property="og:title" content="PoolVibe — Stop guessing. Start knowing." />
+  <meta property="og:description" content="Scan your test strip. Get an exact plan. Know if your service company is cheating you." />
   <meta property="og:image" content="hero.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --teal:      #1A8C94;
-      --teal-lt:   #00C4CC;
-      --teal-bg:   #E8F7F8;
-      --teal-mid:  #D0EFF1;
-      --navy:      #0D3349;
-      --text:      #1A2B3C;
-      --text-sec:  #4A6378;
+      --bg:        #080C10;
+      --bg-2:      #0D1117;
+      --bg-3:      #111820;
+      --aqua:      #00E5CC;
+      --aqua-dim:  rgba(0, 229, 204, 0.12);
       --white:     #FFFFFF;
-      --offwhite:  #F7FAFB;
-      --border:    #E2ECF0;
-      --card-bg:   #FFFFFF;
+      --muted:     rgba(255,255,255,0.45);
+      --muted-2:   rgba(255,255,255,0.25);
+      --border:    rgba(255,255,255,0.07);
+      --light-bg:  #F8F8F6;
+      --light-text:#0D1117;
+      --light-muted:#6B7280;
     }
 
     html { scroll-behavior: smooth; }
+
     body {
-      background: var(--white);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
+    /* ─── FADE-IN ANIMATION ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
 
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 48px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(16px);
+      padding: 18px 48px;
+      background: rgba(8, 12, 16, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px;
+
+    .nav-wordmark {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
       text-decoration: none;
+      color: var(--white);
     }
-    .nav-logo img {
-      width: 40px; height: 40px;
-      border-radius: 8px; object-fit: cover;
+    .nav-wordmark span { color: var(--aqua); }
+
+    .nav-cta {
+      display: inline-block;
+      padding: 10px 22px;
+      background: var(--aqua);
+      color: #080C10;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .nav-logo-text {
-      font-size: 20px; font-weight: 900;
-      color: var(--navy); letter-spacing: -0.5px;
-    }
-    .nav-logo-text em { color: var(--teal); font-style: normal; }
-    .nav-links { display: flex; align-items: center; gap: 28px; }
-    .nav-link {
-      color: var(--text-sec); font-size: 14px; font-weight: 500;
-      text-decoration: none; transition: color .2s;
-    }
-    .nav-link:hover { color: var(--teal); }
-    .nav-btn {
-      background: var(--teal); color: var(--white);
-      padding: 10px 22px; border-radius: 8px;
-      font-weight: 700; font-size: 14px;
-      text-decoration: none; transition: background .2s, transform .15s;
-      box-shadow: 0 4px 14px rgba(26,140,148,0.3);
-    }
-    .nav-btn:hover { background: #16787F; transform: translateY(-1px); }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
     /* ─── HERO ─── */
-    .hero {
-      position: relative; min-height: 92vh;
-      display: flex; align-items: center; overflow: hidden;
-      padding-top: 68px;
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
     }
+
     .hero-bg {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background-image: url('hero.jpg');
-      background-size: cover; background-position: center 35%;
+      background-size: cover;
+      background-position: center right;
+      z-index: 0;
     }
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
       background: linear-gradient(
-        110deg,
-        rgba(13,51,73,0.88) 0%,
-        rgba(13,51,73,0.65) 50%,
-        rgba(13,51,73,0.15) 100%
+        90deg,
+        rgba(8, 12, 16, 0.97) 0%,
+        rgba(8, 12, 16, 0.88) 35%,
+        rgba(8, 12, 16, 0.55) 65%,
+        rgba(8, 12, 16, 0.20) 100%
       );
+      z-index: 1;
     }
+
     .hero-content {
-      position: relative; z-index: 2;
-      max-width: 640px;
-      padding: 80px 64px 80px;
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      padding-top: 100px;
+      width: 100%;
     }
-    .badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(0,196,204,0.15);
-      border: 1px solid rgba(0,196,204,0.4);
-      color: #7EEEF3;
-      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 6px 14px; border-radius: 20px;
+      color: var(--aqua);
       margin-bottom: 24px;
     }
-    h1 {
-      font-size: clamp(32px, 5vw, 58px);
-      font-weight: 900; line-height: 1.1; letter-spacing: -1.5px;
+
+    .hero-headline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
       color: var(--white);
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .hero-subheadline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
       margin-bottom: 20px;
     }
-    h1 .accent { color: #7EEEF3; }
-    .hero-sub {
-      font-size: clamp(15px, 1.8vw, 18px);
-      color: rgba(255,255,255,0.82); line-height: 1.65;
-      margin-bottom: 12px; max-width: 500px;
-    }
-    .hero-sub2 {
-      font-size: 14px; color: rgba(255,255,255,0.55);
-      margin-bottom: 36px; max-width: 460px; line-height: 1.6;
-    }
-    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px; }
+
     .btn-primary {
-      background: var(--teal-lt); color: var(--navy);
-      padding: 14px 30px; border-radius: 10px;
-      font-weight: 800; font-size: 15px;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: opacity .2s, transform .15s; display: inline-block;
-      box-shadow: 0 6px 24px rgba(0,196,204,0.4);
+      display: inline-block;
+      padding: 14px 30px;
+      background: var(--aqua);
+      color: #080C10;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border-radius: 999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
     .btn-ghost {
-      background: rgba(255,255,255,0.1); color: var(--white);
-      padding: 14px 26px; border-radius: 10px;
-      font-weight: 600; font-size: 15px;
+      display: inline-block;
+      padding: 13px 30px;
+      background: transparent;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border-radius: 999px;
       text-decoration: none;
       border: 1px solid rgba(255,255,255,0.25);
-      transition: background .2s; display: inline-block;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
-    .btn-ghost:hover { background: rgba(255,255,255,0.18); }
-    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
-    .hstat-num { font-size: 22px; font-weight: 800; color: var(--white); }
-    .hstat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
 
-    /* ─── SECTION SHARED ─── */
-    .section-label {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 10px;
-    }
-    h2 {
-      font-size: clamp(24px, 3vw, 38px);
-      font-weight: 800; line-height: 1.18;
-      color: var(--navy);
-    }
-    .section-sub {
-      font-size: 16px; color: var(--text-sec);
-      line-height: 1.65; margin-top: 12px;
+    .hero-trust {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-bottom: 80px;
     }
 
-    /* ─── APP MOCKUP STRIP ─── */
-    .app-strip-wrap { background: var(--teal-bg); border-top: 1px solid var(--teal-mid); border-bottom: 1px solid var(--teal-mid); }
-    .app-strip {
-      max-width: 1100px; margin: 0 auto;
-      padding: 80px 48px;
-      display: flex; align-items: center; gap: 64px;
+    .hero-stats {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-start;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px 40px;
+      width: 100%;
     }
-    .app-strip-text { flex: 1; }
-    .app-strip-text h2 { margin-bottom: 14px; }
-    .app-strip-text p { color: var(--text-sec); font-size: 16px; line-height: 1.65; margin-bottom: 28px; }
-    .btn-teal {
-      background: var(--teal); color: var(--white);
-      padding: 13px 26px; border-radius: 10px;
-      font-weight: 700; font-size: 15px;
-      text-decoration: none; display: inline-block;
-      transition: background .2s, transform .15s;
-      box-shadow: 0 4px 16px rgba(26,140,148,0.25);
-    }
-    .btn-teal:hover { background: #16787F; transform: translateY(-1px); }
-    .app-strip-img {
-      flex-shrink: 0; width: 260px; border-radius: 22px; overflow: hidden;
-      box-shadow: 0 24px 60px rgba(13,51,73,0.2), 0 0 0 1px rgba(26,140,148,0.15);
-    }
-    .app-strip-img img { width: 100%; display: block; }
 
-    /* ─── HOW IT WORKS ─── */
-    .how-section { padding: 100px 48px; background: var(--white); }
-    .how-inner { max-width: 1100px; margin: 0 auto; }
-    .how-header { text-align: center; margin-bottom: 56px; }
-    .how-header h2 { margin-bottom: 12px; }
-    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .step-card {
-      background: var(--offwhite);
-      border: 1px solid var(--border);
-      border-radius: 18px; padding: 28px 24px;
-      transition: border-color .25s, box-shadow .25s, transform .2s;
+    .hero-stat {
+      display: flex;
+      align-items: center;
+      gap: 28px;
     }
-    .step-card:hover {
-      border-color: var(--teal-lt);
-      box-shadow: 0 8px 32px rgba(26,140,148,0.1);
-      transform: translateY(-3px);
+
+    .hero-stat + .hero-stat::before {
+      content: '·';
+      color: var(--muted-2);
+      font-size: 1.2rem;
+      margin-right: 0;
     }
-    .step-num {
-      width: 38px; height: 38px;
-      background: var(--teal); color: var(--white);
-      border-radius: 50%; font-weight: 900; font-size: 15px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px;
+
+    .hero-stat-item {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.01em;
     }
-    .step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
-    .step-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; }
-    .step-tag {
-      display: inline-block;
-      background: var(--teal-bg); color: var(--teal);
-      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
-      padding: 3px 8px; border-radius: 4px; margin-top: 14px;
-      border: 1px solid var(--teal-mid);
+    .hero-stat-item strong {
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
     }
 
     /* ─── PROBLEM ─── */
-    .pain-section { padding: 100px 48px; background: var(--offwhite); border-top: 1px solid var(--border); }
-    .pain-inner { max-width: 1100px; margin: 0 auto; }
-    .pain-intro { text-align: center; max-width: 580px; margin: 0 auto 52px; }
-    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .pain-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px 22px;
-      transition: box-shadow .2s, transform .2s;
+    #problem {
+      background: var(--bg-2);
+      padding: 120px 48px;
     }
-    .pain-card:hover { box-shadow: 0 6px 24px rgba(13,51,73,0.07); transform: translateY(-2px); }
-    .pain-icon { font-size: 26px; margin-bottom: 12px; }
-    .pain-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .pain-card p { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
 
-    /* ─── WHY POOLVIBE ─── */
-    .why-section { padding: 100px 48px; background: var(--white); border-top: 1px solid var(--border); }
-    .why-inner { max-width: 1100px; margin: 0 auto; }
-    .why-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
-    .why-callout {
-      background: linear-gradient(135deg, var(--teal-bg) 0%, var(--teal-mid) 100%);
-      border: 1px solid var(--teal-mid);
-      border-radius: 20px; padding: 36px 44px;
-      margin-bottom: 40px; text-align: center;
+    .problem-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .why-callout p {
-      font-size: clamp(16px, 2vw, 20px);
-      line-height: 1.6; color: var(--navy); font-weight: 500;
-    }
-    .why-callout strong { color: var(--teal); }
-    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .why-card {
-      background: var(--offwhite);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px 22px;
-      transition: box-shadow .2s, transform .2s;
-    }
-    .why-card:hover { box-shadow: 0 6px 24px rgba(13,51,73,0.07); transform: translateY(-2px); }
-    .why-card .wicon { font-size: 26px; margin-bottom: 12px; }
-    .why-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .why-card p { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
 
-    /* ─── WHO IT'S FOR ─── */
-    .audience-section { padding: 100px 48px; background: var(--teal-bg); border-top: 1px solid var(--teal-mid); }
-    .audience-inner { max-width: 1100px; margin: 0 auto; }
-    .audience-header { text-align: center; max-width: 580px; margin: 0 auto 48px; }
-    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .audience-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 36px;
-      box-shadow: 0 2px 12px rgba(13,51,73,0.05);
-      transition: box-shadow .2s, transform .2s;
+    .pull-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      max-width: 900px;
+      margin-bottom: 80px;
+      border-left: 3px solid var(--aqua);
+      padding-left: 32px;
     }
-    .audience-card:hover { box-shadow: 0 12px 40px rgba(13,51,73,0.1); transform: translateY(-2px); }
-    .aud-icon { font-size: 36px; margin-bottom: 16px; }
-    .audience-card h3 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
-    .audience-card > p { font-size: 14px; color: var(--text-sec); line-height: 1.65; margin-bottom: 20px; }
-    .aud-bullets { list-style: none; }
-    .aud-bullets li {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 14px; color: var(--text-sec); line-height: 1.5;
-      padding: 8px 0; border-top: 1px solid var(--border);
-    }
-    .aud-bullets li:first-child { border-top: none; padding-top: 0; }
-    .aud-dot { color: var(--teal); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
 
-    /* ─── FOUNDER ─── */
-    .founder-section {
-      padding: 100px 48px;
-      background: var(--navy);
-    }
-    .founder-inner { max-width: 820px; margin: 0 auto; text-align: center; }
-    .qmark { font-size: 72px; line-height: 0.6; color: var(--teal-lt); opacity: .4; margin-bottom: 24px; }
-    .founder-quote {
-      font-size: clamp(16px, 2vw, 22px);
-      font-weight: 500; line-height: 1.7; color: rgba(255,255,255,0.9);
-      margin-bottom: 36px;
-    }
-    .founder-quote em { color: #7EEEF3; font-style: normal; }
-    .founder-byline {
-      display: flex; align-items: center; justify-content: center; gap: 14px;
-    }
-    .founder-avatar {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--teal); overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 18px; color: var(--white);
-    }
-    .founder-name { font-weight: 700; font-size: 15px; color: var(--white); text-align: left; }
-    .founder-title { font-size: 13px; color: rgba(255,255,255,0.5); }
-
-    /* ─── BETA FORM ─── */
-    #beta {
-      padding: 100px 48px;
-      background: var(--offwhite);
+    .pain-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
       border-top: 1px solid var(--border);
+      padding-top: 60px;
     }
-    .form-wrap {
-      background: var(--white);
+
+    .pain-point-num {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--aqua);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .pain-point-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .pain-point-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    #how {
+      background: var(--light-bg);
+      padding: 120px 48px;
+      color: var(--light-text);
+    }
+
+    .how-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .how-headline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--light-text);
+      max-width: 640px;
+      margin-bottom: 80px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 40px;
+      align-items: start;
+      padding: 56px 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .step-number {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      color: rgba(0,0,0,0.07);
+      user-select: none;
+      padding-top: 4px;
+    }
+
+    .step-content {}
+
+    .step-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.3rem, 2vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--light-text);
+      margin-bottom: 12px;
+    }
+
+    .step-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--light-muted);
+      line-height: 1.65;
+      max-width: 520px;
+    }
+
+    /* ─── FEATURES ─── */
+    #features {
+      background: var(--bg-3);
+      padding: 120px 48px;
+    }
+
+    .features-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 16px;
+    }
+
+    .section-headline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 64px;
+      max-width: 560px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .feature-card {
+      padding: 36px 32px;
       border: 1px solid var(--border);
-      border-radius: 24px; padding: 56px 52px;
-      max-width: 600px; margin: 0 auto;
-      box-shadow: 0 8px 48px rgba(13,51,73,0.08);
+      background: rgba(255,255,255,0.02);
+      transition: background 0.25s ease, backdrop-filter 0.25s ease;
     }
-    .form-wrap .section-label { margin-bottom: 10px; }
-    .form-wrap h2 { font-size: 30px; margin-bottom: 10px; }
-    .form-intro { color: var(--text-sec); font-size: 15px; margin-bottom: 32px; line-height: 1.6; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
-    label { font-size: 11px; font-weight: 700; color: var(--text-sec); letter-spacing: 0.8px; text-transform: uppercase; }
-    input, select, textarea {
-      background: var(--offwhite);
+
+    .feature-card:hover {
+      background: rgba(255,255,255,0.045);
+      backdrop-filter: blur(8px);
+    }
+
+    .feature-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 14px;
+    }
+
+    .feature-heading {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .feature-body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── FOUNDER QUOTE ─── */
+    #quote {
+      background: var(--bg);
+      padding: 140px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .quote-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .founder-quote {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.35rem);
+      font-weight: 500;
+      line-height: 1.38;
+      letter-spacing: -0.025em;
+      color: var(--white);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .founder-quote::before {
+      content: '\201C';
+      font-size: 5em;
+      line-height: 0;
+      vertical-align: -0.45em;
+      color: var(--aqua);
+      opacity: 0.4;
+      margin-right: 4px;
+      font-family: Georgia, serif;
+    }
+
+    .founder-byline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .founder-byline strong {
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+    }
+
+    /* ─── DOWNLOAD CTA ─── */
+    #download {
+      background: var(--bg-2);
+      padding: 140px 48px;
+      text-align: center;
+    }
+
+    .download-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .download-headline {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .download-subtext {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 48px;
+    }
+
+    .store-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 26px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      min-width: 170px;
+    }
+    .store-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .store-btn-icon {
+      flex-shrink: 0;
+    }
+
+    .store-btn-text {
+      text-align: left;
+    }
+
+    .store-btn-sub {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .store-btn-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      display: block;
+    }
+
+    .email-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .email-divider::before,
+    .email-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .email-divider-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .email-form {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .email-input {
+      flex: 1;
+      padding: 13px 18px;
+      background: rgba(255,255,255,0.05);
       border: 1px solid var(--border);
-      border-radius: 10px; color: var(--text); font-size: 15px;
-      padding: 12px 16px; width: 100%;
-      outline: none; transition: border-color .2s, box-shadow .2s;
-      -webkit-appearance: none;
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
     }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--teal);
-      box-shadow: 0 0 0 3px rgba(26,140,148,0.1);
-      background: var(--white);
+    .email-input::placeholder { color: var(--muted); }
+    .email-input:focus { border-color: rgba(0, 229, 204, 0.4); }
+
+    .email-submit {
+      padding: 13px 22px;
+      background: var(--aqua);
+      color: #080C10;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s ease;
     }
-    textarea { resize: vertical; min-height: 88px; }
-    .submit-btn {
-      width: 100%; margin-top: 4px;
-      background: var(--teal); color: var(--white);
-      padding: 16px; border: none; border-radius: 10px;
-      font-weight: 800; font-size: 16px; cursor: pointer;
-      box-shadow: 0 6px 24px rgba(26,140,148,0.3);
-      transition: background .2s, transform .15s;
+    .email-submit:hover { opacity: 0.88; }
+
+    .form-message {
+      margin-top: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      min-height: 20px;
     }
-    .submit-btn:hover { background: #16787F; transform: translateY(-1px); }
-    .form-note { font-size: 12px; color: var(--text-sec); opacity: .7; text-align: center; margin-top: 14px; }
-    .success-msg { display: none; text-align: center; padding: 20px 0; }
-    .success-icon { font-size: 56px; margin-bottom: 16px; }
-    .success-msg h3 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
-    .success-msg p { color: var(--text-sec); font-size: 15px; line-height: 1.6; }
+    .form-message.success { color: var(--aqua); }
+    .form-message.error { color: #FF6B6B; }
 
     /* ─── FOOTER ─── */
     footer {
-      padding: 36px 48px; background: var(--navy);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px;
+      background: var(--bg);
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
     }
-    .footer-logo { display: flex; align-items: center; gap: 8px; }
-    .footer-logo img { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
-    .footer-logo-text { font-size: 16px; font-weight: 900; color: var(--white); }
-    .footer-logo-text em { color: var(--teal-lt); font-style: normal; }
-    footer p { font-size: 13px; color: rgba(255,255,255,0.45); }
-    footer a { color: var(--teal-lt); text-decoration: none; }
+
+    .footer-wordmark {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .footer-wordmark span { color: var(--aqua); }
+
+    .footer-right {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .footer-right a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-right a:hover { color: rgba(255,255,255,0.7); }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 1000px) {
-      .steps-grid { grid-template-columns: repeat(2, 1fr); }
-      .pain-grid { grid-template-columns: repeat(2, 1fr); }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+
+      .hero-content { padding: 0 24px; padding-top: 90px; }
+      .hero-stats { padding: 0 24px 32px; flex-wrap: wrap; gap: 12px; }
+      .hero-stat + .hero-stat::before { display: none; }
+
+      #problem { padding: 80px 24px; }
+      .pull-quote { padding-left: 20px; }
+      .pain-points { grid-template-columns: 1fr; gap: 36px; }
+
+      #how { padding: 80px 24px; }
+      .step { grid-template-columns: 80px 1fr; gap: 20px; }
+      .step-number { font-size: 3.5rem; }
+
+      #features { padding: 80px 24px; }
+      .features-grid { grid-template-columns: 1fr; gap: 2px; }
+
+      #quote { padding: 80px 24px; }
+
+      #download { padding: 80px 24px; }
+      .email-form { flex-direction: column; }
+
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+      .footer-right { text-align: center; }
     }
-    @media (max-width: 860px) {
-      nav { padding: 12px 20px; }
-      .nav-links .nav-link { display: none; }
-      .hero-content { padding: 80px 24px 60px; }
-      .app-strip { flex-direction: column; padding: 60px 24px; }
-      .app-strip-img { width: 100%; max-width: 280px; margin: 0 auto; }
-      .how-section, .pain-section, .why-section, .audience-section, .founder-section, #beta { padding: 72px 24px; }
-      .audience-grid { grid-template-columns: 1fr; }
-      .form-wrap { padding: 36px 22px; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; text-align: center; padding: 32px 24px; }
-      .why-callout { padding: 28px 24px; }
+
+    @media (max-width: 480px) {
+      .hero-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(8, 12, 16, 0.95) 0%,
+          rgba(8, 12, 16, 0.90) 60%,
+          rgba(8, 12, 16, 0.75) 100%
+        );
+      }
     }
-    @media (max-width: 560px) {
-      .steps-grid { grid-template-columns: 1fr; }
-      .pain-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .hero-stats { flex-direction: column; gap: 16px; }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .pain-points { gap: 32px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="#" class="nav-logo">
-    <img src="logo.png" alt="PoolVibe" />
-    <span class="nav-logo-text">Pool<em>Vibe</em></span>
-  </a>
-  <div class="nav-links">
-    <a href="#how" class="nav-link">How it works</a>
-    <a href="#why" class="nav-link">Why PoolVibe</a>
-    <a href="#beta" class="nav-link">Beta</a>
-    <a href="#beta" class="nav-btn">Join Beta →</a>
-  </div>
-</nav>
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="#" class="nav-wordmark">Pool<span>Vibe</span></a>
+    <a href="#download" class="nav-cta">Download the App</a>
+  </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="badge">🏊 Now accepting beta testers</div>
-    <h1>Know exactly what<br>to add, what to buy,<br>and when your pool service<br>is <span class="accent">getting it wrong.</span></h1>
-    <p class="hero-sub">PoolVibe helps pool owners use photos, test strip readings, symptoms, and maintenance reports to get clear chemical guidance and smarter shopping recommendations.</p>
-    <p class="hero-sub2">Built for DIY owners and pool owners who want to double-check their maintenance reports.</p>
-    <div class="hero-ctas">
-      <a href="#beta" class="btn-primary">Join the Beta →</a>
-      <a href="#how" class="btn-ghost">See How It Works</a>
+  <!-- ─── HERO ─── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow reveal">Pool intelligence, finally.</span>
+      <h1 class="hero-headline reveal reveal-delay-1">Stop guessing.<br>Start knowing.</h1>
+      <p class="hero-subheadline reveal reveal-delay-2">Scan your test strip. Get an exact plan. Know if your service company is cheating you.</p>
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="#download" class="btn-primary">Download Free</a>
+        <a href="#how" class="btn-ghost">See How It Works</a>
+      </div>
+      <p class="hero-trust reveal reveal-delay-4">Free for pool owners &nbsp;·&nbsp; Available on iOS &amp; Android</p>
     </div>
     <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-num">Free</div>
-        <div class="hstat-label">Affiliate model</div>
+      <div class="hero-stat">
+        <div class="hero-stat-item"><strong>8.4M+</strong> Pools in the US</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-item"><strong>$26.9B</strong> Industry</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-item"><strong>Free</strong> for Pool Owners</div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- APP MOCKUP -->
-<div class="app-strip-wrap">
-  <div class="app-strip">
-    <div class="app-strip-text">
-      <div class="section-label">The app</div>
-      <h2>A smart pool operator<br>in your pocket</h2>
-      <p>Build your pool profile once from photos and a few questions. Every week, enter your readings or upload your service report — and get back an exact plan: what to add, how much, in what order, and exactly what to buy.</p>
-      <a href="#beta" class="btn-teal">Get Early Access →</a>
-    </div>
-    <div class="app-strip-img">
-      <img src="app-preview.jpg" alt="PoolVibe app showing pool chemistry dashboard" loading="lazy" />
-    </div>
-  </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="how-inner">
-    <div class="how-header">
-      <div class="section-label">How it works</div>
-      <h2>From test strip to action plan<br>in four steps</h2>
-      <p class="section-sub" style="max-width:500px; margin: 12px auto 0;">You don't need to know your gallons. PoolVibe estimates your pool size from photos and guided questions.</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <h3>Upload pool photos and create your profile</h3>
-        <p>Share photos of your pool and answer a few guided questions. PoolVibe estimates your pool size — no guessing your gallon count.</p>
-        <span class="step-tag">POOL PROFILE</span>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <h3>Enter strip values, symptoms, or reports</h3>
-        <p>Input your test strip readings, describe what you're seeing, or upload a service report. PoolVibe takes it from there.</p>
-        <span class="step-tag">CONDITION INTAKE</span>
-      </div>
-      <div class="step-card">
-        <div class="step-num">3</div>
-        <h3>Get a clear action plan with exact dosing</h3>
-        <p>Specific chemicals, specific amounts, in the right order — with timing notes so you don't waste product or undo your own work.</p>
-        <span class="step-tag">ACTION PLAN</span>
-      </div>
-      <div class="step-card">
-        <div class="step-num">4</div>
-        <h3>Track history and catch bad maintenance</h3>
-        <p>See your pool's condition over time. Compare maintenance reports against what your pool actually needed and catch underdosing early.</p>
-        <span class="step-tag">MAINTENANCE OVERSIGHT</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE PROBLEM -->
-<section class="pain-section">
-  <div class="pain-inner">
-    <div class="pain-intro">
-      <div class="section-label">The problem</div>
-      <h2>Pool care shouldn't feel like guesswork</h2>
-      <p class="section-sub">Every pool owner has been there — staring at a test strip, unsure what to add, hoping the pool store gets it right.</p>
-    </div>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon">🧪</div>
-        <h3>Test strips don't tell you what to do next</h3>
-        <p>You read the colors, but then what? Most owners are left guessing how much of what to add — and the label math assumes you know your gallons.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">📐</div>
-        <h3>Most owners don't know their pool gallons</h3>
-        <p>Without an accurate volume estimate, every chemical calculation is off. You can be wrong by 20% before you even open a bottle.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">🛒</div>
-        <h3>Chemical buying is a guessing game</h3>
-        <p>Pool store apps and calculators don't know your pool. You end up buying too much, too little, or the wrong product entirely.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">📋</div>
-        <h3>Maintenance companies can cut corners</h3>
-        <p>Weekly service doesn't always mean thorough service. Underdosing is common — and you'd never know from the invoice.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">⏱️</div>
-        <h3>Chemical order matters — most get it wrong</h3>
-        <p>Add shock before lowering pH and you waste half of it. Sequence matters, and no one tells you this at the pool store.</p>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">💸</div>
-        <h3>Wrong decisions add up fast</h3>
-        <p>Wrong chemicals, wrong quantities, and bad advice compound into real money — and a pool that never quite looks right.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY POOLVIBE -->
-<section class="why-section" id="why">
-  <div class="why-inner">
-    <div class="why-header">
-      <div class="section-label">Why PoolVibe</div>
-      <h2>More than a calculator.<br>More useful than a pool store app.</h2>
-    </div>
-    <div class="why-callout">
-      <p><strong>Pool calculators only do math.</strong> Pool store apps only sell products. <strong>PoolVibe combines everything</strong> — your pool's profile, current condition, exact dosing, product recommendations, and maintenance oversight — into one clear system built for pool owners, not pool stores.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card">
-        <div class="wicon">📸</div>
-        <h3>Profile from photos, not guesses</h3>
-        <p>PoolVibe estimates your gallon count from pool photos and guided questions. Every recommendation is built on your actual pool.</p>
-      </div>
-      <div class="why-card">
-        <div class="wicon">🔬</div>
-        <h3>Exact dosing, right order</h3>
-        <p>Not just "add some shock." Specific amounts, specific products, in the right sequence — with timing notes that protect your results.</p>
-      </div>
-      <div class="why-card">
-        <div class="wicon">🛒</div>
-        <h3>Product picks tied to your condition</h3>
-        <p>Two or three recommendations based on what your water actually needs — with direct buying links and no upsell padding.</p>
-      </div>
-      <div class="why-card">
-        <div class="wicon">🔍</div>
-        <h3>Maintenance report review</h3>
-        <p>Upload your service report. PoolVibe tells you if the amounts added match what your pool size and condition actually required.</p>
-      </div>
-      <div class="why-card">
-        <div class="wicon">📆</div>
-        <h3>Track week over week</h3>
-        <p>Every session is saved. See how your pool responds over time and spot patterns before they become expensive problems.</p>
-      </div>
-      <div class="why-card">
-        <div class="wicon">🆓</div>
-        <h3>Free to use</h3>
-        <p>PoolVibe is free for pool owners. Revenue comes from affiliate product links — we only recommend what your pool actually needs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR -->
-<section class="audience-section">
-  <div class="audience-inner">
-    <div class="audience-header">
-      <div class="section-label">Who it's for</div>
-      <h2>Whether you do it yourself<br>or pay someone else</h2>
-    </div>
-    <div class="audience-grid">
-      <div class="audience-card">
-        <div class="aud-icon">🔧</div>
-        <h3>DIY Pool Owners</h3>
-        <p>You handle the pool yourself. You buy the chemicals, run the tests, and make the calls. PoolVibe gives you the clarity to do it right.</p>
-        <ul class="aud-bullets">
-          <li><span class="aud-dot">→</span> Save money buying the right chemicals in the right amounts</li>
-          <li><span class="aud-dot">→</span> Gain confidence with clear, step-by-step guidance</li>
-          <li><span class="aud-dot">→</span> Stop relying on pool store advice that doesn't know your pool</li>
-        </ul>
-      </div>
-      <div class="audience-card">
-        <div class="aud-icon">📋</div>
-        <h3>Managed Pool Owners</h3>
-        <p>You pay a maintenance company to handle it. But you want to know they're actually doing it right — not running a generic route.</p>
-        <ul class="aud-bullets">
-          <li><span class="aud-dot">→</span> Verify your service company is dosing correctly for your pool size</li>
-          <li><span class="aud-dot">→</span> Catch underdosing and lazy maintenance before it costs you</li>
-          <li><span class="aud-dot">→</span> Get oversight without needing to become a pool chemistry expert</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUNDER -->
-<section class="founder-section">
-  <div class="founder-inner">
-    <div class="qmark">"</div>
-    <p class="founder-quote">I have my own pool. I've had cloudy water I couldn't explain, maintenance reports I couldn't verify, and a garage full of chemicals I wasn't sure I was using right. <em>AI helped me solve a pool problem in 10 minutes that had been recurring for weeks.</em> That's what PoolVibe is — that help, built into an app, available every week.<br><br>This isn't a side project. It's a focused tool for a specific problem — and I got tired of staring at test strips and hoping for the best.</p>
-    <div class="founder-byline">
-      <div class="founder-avatar">A</div>
-      <div>
-        <div class="founder-name">Angela</div>
-        <div class="founder-title">Founder, PoolVibe</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BETA FORM -->
-<section id="beta">
-  <div class="form-wrap">
-    <div class="section-label">Early access</div>
-    <h2>Get early access<br>to PoolVibe</h2>
-    <p class="form-intro">Join the beta and be first to try a smarter way to manage your pool. No commitments, no spam.</p>
-    <form id="betaForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fname">Your name</label>
-          <input type="text" id="fname" name="name" placeholder="Angela" required />
+  <!-- ─── PROBLEM ─── -->
+  <section id="problem">
+    <div class="problem-inner">
+      <p class="pull-quote reveal">
+        Pool calculators only do math. Pool store apps only sell products. Your pool needs something that actually knows it.
+      </p>
+      <div class="pain-points">
+        <div class="pain-point reveal reveal-delay-1">
+          <div class="pain-point-num">01</div>
+          <h3 class="pain-point-heading">You don't know your gallons.</h3>
+          <p class="pain-point-body">Most label math is wrong before you open the bottle. The dose is built on a number nobody verified.</p>
         </div>
-        <div class="form-group">
-          <label for="femail">Email address</label>
-          <input type="email" id="femail" name="email" placeholder="you@email.com" required />
+        <div class="pain-point reveal reveal-delay-2">
+          <div class="pain-point-num">02</div>
+          <h3 class="pain-point-heading">Your service company might be cutting corners.</h3>
+          <p class="pain-point-body">You'd never know from the invoice. PoolVibe cross-references what they say against what your pool actually needed.</p>
+        </div>
+        <div class="pain-point reveal reveal-delay-3">
+          <div class="pain-point-num">03</div>
+          <h3 class="pain-point-heading">Chemical order matters more than which chemicals.</h3>
+          <p class="pain-point-body">Nobody tells you this at the pool store. Sequence wrong and you've just wasted everything you added.</p>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="fstate">State</label>
-          <input type="text" id="fstate" name="state" placeholder="Florida" />
-        </div>
-        <div class="form-group">
-          <label for="fpooltype">Pool type</label>
-          <select id="fpooltype" name="pooltype">
-            <option value="">Select one</option>
-            <option value="saltwater">Saltwater</option>
-            <option value="chlorine">Chlorine</option>
-            <option value="unsure">Not sure</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="fown">How do you manage your pool?</label>
-        <select id="fown" name="ownership">
-          <option value="">Select one</option>
-          <option value="diy">I do it myself (DIY)</option>
-          <option value="company">I pay a maintenance company</option>
-          <option value="both">Mix of both</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="ffrustration">Biggest pool-care frustration</label>
-        <textarea id="ffrustration" name="frustration" placeholder="Cloudy water that keeps coming back, not trusting my service reports, not knowing how much to add..."></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Join the Beta →</button>
-      <p class="form-note">No spam. No commitments. Early access when we're ready.</p>
-    </form>
-    <div class="success-msg" id="successMsg">
-      <div class="success-icon">✅</div>
-      <h3>You're on the list.</h3>
-      <p>PoolVibe is being built to make pool care less confusing and more exact.<br>We'll reach out when early access is ready.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <img src="logo.png" alt="PoolVibe" />
-    <span class="footer-logo-text">Pool<em>Vibe</em></span>
-  </div>
-  <p>© 2026 PoolVibe LLC · <a href="mailto:hello@pool-vibe.com">hello@pool-vibe.com</a></p>
-  <p style="font-size:11px; opacity:.35;">Beta interest only. Product in development.</p>
-</footer>
+  <!-- ─── HOW IT WORKS ─── -->
+  <section id="how">
+    <div class="how-inner">
+      <h2 class="how-headline reveal">From test strip to clear water in minutes.</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3 class="step-heading">Build your pool profile</h3>
+            <p class="step-body">Upload photos. Answer a few questions. PoolVibe estimates your gallons — no measuring required. This is the foundation everything else builds on.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3 class="step-heading">Enter your readings</h3>
+            <p class="step-body">Test strip values, visual symptoms, or upload a maintenance report. Takes 60 seconds. PoolVibe understands what it's looking at.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3 class="step-heading">Get your exact action plan</h3>
+            <p class="step-body">Specific chemicals. Exact amounts. Right order. With timing notes so you don't waste what you just added. No more guesswork, no more re-treating.</p>
+          </div>
+        </div>
+        <div class="step reveal">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <h3 class="step-heading">Track and verify</h3>
+            <p class="step-body">See your pool's history week over week. Compare maintenance reports against what your pool actually needed. Finally, accountability.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script>
-  document.getElementById('betaForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('.submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'Submitting…';
+  <!-- ─── FEATURES ─── -->
+  <section id="features">
+    <div class="features-inner">
+      <p class="section-eyebrow reveal">What's inside</p>
+      <h2 class="section-headline reveal reveal-delay-1">Everything your pool has been missing.</h2>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-label">Photo Profile</div>
+          <h3 class="feature-heading">Pool size estimated from photos</h3>
+          <p class="feature-body">Skip the tape measure. Upload a few photos, answer a couple of questions, and PoolVibe figures out your gallons. Accurate enough to matter.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-1">
+          <div class="feature-label">Exact Dosing</div>
+          <h3 class="feature-heading">Precise amounts, right sequence</h3>
+          <p class="feature-body">Not a range. Not "add some." The exact dose for your specific pool volume and current chemistry, in the exact order that works.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-2">
+          <div class="feature-label">Smart Recommendations</div>
+          <h3 class="feature-heading">Products matched to your condition</h3>
+          <p class="feature-body">No generic product lists. PoolVibe recommends what your pool actually needs right now, based on real readings — not shelf placement.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-3">
+          <div class="feature-label">Report Review</div>
+          <h3 class="feature-heading">Upload and verify service reports</h3>
+          <p class="feature-body">Did your company actually treat your pool the way they said? Upload their report. PoolVibe compares it against what your water needed.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-label">History Tracking</div>
+          <h3 class="feature-heading">Week-over-week visibility</h3>
+          <p class="feature-body">See your pool's chemistry trend over time. Spot patterns. Know if things are actually improving or just cycling between bad and worse.</p>
+        </div>
+        <div class="feature-card reveal reveal-delay-4">
+          <div class="feature-label">Free Model</div>
+          <h3 class="feature-heading">Free forever for pool owners</h3>
+          <p class="feature-body">No subscription. No paywalls. PoolVibe is free because pool owners deserve real help — revenue comes from affiliate partnerships, not your wallet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const email       = document.getElementById('femail').value.trim();
-    const firstName   = document.getElementById('fname').value.trim().split(' ')[0];
-    const state       = document.getElementById('fstate').value.trim();
-    const pooltype    = document.getElementById('fpooltype').value;
-    const ownership   = document.getElementById('fown').value;
-    const frustration = document.getElementById('ffrustration').value.trim();
+  <!-- ─── FOUNDER QUOTE ─── -->
+  <section id="quote">
+    <div class="quote-inner">
+      <p class="founder-quote reveal">
+        I had cloudy water I couldn't explain, maintenance reports I couldn't verify, and a garage full of chemicals I wasn't sure I was using right. AI solved my pool problem in 10 minutes. That's what PoolVibe is — that, built into an app.
+      </p>
+      <p class="founder-byline reveal reveal-delay-1"><strong>Angela</strong> &nbsp;·&nbsp; Founder, PoolVibe</p>
+    </div>
+  </section>
 
-    try {
-      // Subscribe via Kit v4 API — tag: PoolVibe Beta (id 19625998)
-      const res = await fetch('https://api.kit.com/v4/subscribers', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Kit-Api-Key': 'kit_f4a5279d2b2b75bdc5c0bf3d47e04bf3'
-        },
-        body: JSON.stringify({
-          email_address: email,
-          first_name: firstName,
-          tag_ids: [19625998],
-          fields: {
-            state: state,
-            pool_type: pooltype,
-            ownership: ownership,
-            biggest_frustration: frustration
-          }
-        })
+  <!-- ─── DOWNLOAD CTA ─── -->
+  <section id="download">
+    <div class="download-inner">
+      <h2 class="download-headline reveal">Download PoolVibe free.</h2>
+      <p class="download-subtext reveal reveal-delay-1">Now available on iOS and Android. Free for pool owners.</p>
+      <div class="store-buttons reveal reveal-delay-2">
+        <a href="#" class="store-btn">
+          <div class="store-btn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+          </div>
+          <div class="store-btn-text">
+            <span class="store-btn-sub">Download on the</span>
+            <span class="store-btn-name">App Store</span>
+          </div>
+        </a>
+        <a href="#" class="store-btn">
+          <div class="store-btn-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.18 23.76c.3.17.64.24.99.19l12.6-7.27-2.75-2.75-10.84 9.83zM.29 1.42C.11 1.73 0 2.09 0 2.52v18.96c0 .43.11.79.29 1.1l.06.06 10.62-10.62v-.12L.35 1.36l-.06.06zM20.14 10.41l-2.98-1.72-3.09 3.09 3.09 3.09 3-1.73c.86-.5.86-1.31-.02-1.73zM3.18.24l12.6 7.27-2.75 2.75L3.18.24z"/>
+            </svg>
+          </div>
+          <div class="store-btn-text">
+            <span class="store-btn-sub">Get it on</span>
+            <span class="store-btn-name">Google Play</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="email-divider reveal">
+        <span class="email-divider-text">or stay in the loop</span>
+      </div>
+
+      <form class="email-form reveal reveal-delay-1" id="notify-form" onsubmit="submitEmail(event)">
+        <input
+          type="email"
+          class="email-input"
+          id="email-input"
+          placeholder="your@email.com"
+          required
+        />
+        <button type="submit" class="email-submit" id="submit-btn">Notify me</button>
+      </form>
+      <div class="form-message" id="form-message"></div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <a href="#" class="footer-wordmark">Pool<span>Vibe</span></a>
+    <div class="footer-right">
+      &copy; 2025 PoolVibe &nbsp;·&nbsp; <a href="mailto:hello@poolvibe.com">hello@poolvibe.com</a>
+    </div>
+  </footer>
+
+  <script>
+    // ─── INTERSECTION OBSERVER (fade-in on scroll) ───
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-      if (res.ok) {
-        document.getElementById('betaForm').style.display = 'none';
-        document.getElementById('successMsg').style.display = 'block';
-      } else {
-        throw new Error('API error ' + res.status);
+    reveals.forEach(el => observer.observe(el));
+
+    // ─── KIT EMAIL FORM ───
+    async function submitEmail(e) {
+      e.preventDefault();
+      const email = document.getElementById('email-input').value.trim();
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('form-message');
+
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      msg.textContent = '';
+      msg.className = 'form-message';
+
+      try {
+        const response = await fetch('https://api.kit.com/v4/subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Kit-Api-Key': 'kit_f4a5279d2b2b75bdc5c0bf3d47e04bf3'
+          },
+          body: JSON.stringify({
+            email_address: email,
+            tag_ids: [19625998]
+          })
+        });
+
+        if (response.ok || response.status === 200 || response.status === 201) {
+          msg.textContent = "You're on the list. We'll be in touch.";
+          msg.className = 'form-message success';
+          document.getElementById('email-input').value = '';
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (response.status === 422 || (data && data.errors)) {
+            msg.textContent = 'You\'re already subscribed — you\'re all set!';
+            msg.className = 'form-message success';
+          } else {
+            throw new Error('Server error');
+          }
+        }
+      } catch (err) {
+        msg.textContent = 'Something went wrong. Try again in a moment.';
+        msg.className = 'form-message error';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Notify me';
       }
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = 'Join the Beta →';
-      alert('Something went wrong — please try again or email hello@pool-vibe.com');
     }
-  });
-</script>
+  </script>
 </body>
 </html>

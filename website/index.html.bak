@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PoolVibe — Know exactly what your pool needs</title>
+  <meta name="description" content="PoolVibe helps pool owners get exact chemical guidance, smarter product recommendations, and catch when their maintenance company is getting it wrong." />
+  <meta property="og:title" content="PoolVibe — Know exactly what your pool needs" />
+  <meta property="og:description" content="Stop guessing. Get exact dosing from your test results, photos, and maintenance reports." />
+  <meta property="og:image" content="hero.jpg" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:      #1A8C94;
+      --teal-lt:   #00C4CC;
+      --teal-bg:   #E8F7F8;
+      --teal-mid:  #D0EFF1;
+      --navy:      #0D3349;
+      --text:      #1A2B3C;
+      --text-sec:  #4A6378;
+      --white:     #FFFFFF;
+      --offwhite:  #F7FAFB;
+      --border:    #E2ECF0;
+      --card-bg:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 40px; height: 40px;
+      border-radius: 8px; object-fit: cover;
+    }
+    .nav-logo-text {
+      font-size: 20px; font-weight: 900;
+      color: var(--navy); letter-spacing: -0.5px;
+    }
+    .nav-logo-text em { color: var(--teal); font-style: normal; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-link {
+      color: var(--text-sec); font-size: 14px; font-weight: 500;
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-link:hover { color: var(--teal); }
+    .nav-btn {
+      background: var(--teal); color: var(--white);
+      padding: 10px 22px; border-radius: 8px;
+      font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: background .2s, transform .15s;
+      box-shadow: 0 4px 14px rgba(26,140,148,0.3);
+    }
+    .nav-btn:hover { background: #16787F; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center; overflow: hidden;
+      padding-top: 68px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('hero.jpg');
+      background-size: cover; background-position: center 35%;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        110deg,
+        rgba(13,51,73,0.88) 0%,
+        rgba(13,51,73,0.65) 50%,
+        rgba(13,51,73,0.15) 100%
+      );
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 640px;
+      padding: 80px 64px 80px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,196,204,0.15);
+      border: 1px solid rgba(0,196,204,0.4);
+      color: #7EEEF3;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 6px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 900; line-height: 1.1; letter-spacing: -1.5px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    h1 .accent { color: #7EEEF3; }
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: rgba(255,255,255,0.82); line-height: 1.65;
+      margin-bottom: 12px; max-width: 500px;
+    }
+    .hero-sub2 {
+      font-size: 14px; color: rgba(255,255,255,0.55);
+      margin-bottom: 36px; max-width: 460px; line-height: 1.6;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 44px; }
+    .btn-primary {
+      background: var(--teal-lt); color: var(--navy);
+      padding: 14px 30px; border-radius: 10px;
+      font-weight: 800; font-size: 15px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: opacity .2s, transform .15s; display: inline-block;
+      box-shadow: 0 6px 24px rgba(0,196,204,0.4);
+    }
+    .btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.1); color: var(--white);
+      padding: 14px 26px; border-radius: 10px;
+      font-weight: 600; font-size: 15px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: background .2s; display: inline-block;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.18); }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .hstat-num { font-size: 22px; font-weight: 800; color: var(--white); }
+    .hstat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* ─── SECTION SHARED ─── */
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 10px;
+    }
+    h2 {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 800; line-height: 1.18;
+      color: var(--navy);
+    }
+    .section-sub {
+      font-size: 16px; color: var(--text-sec);
+      line-height: 1.65; margin-top: 12px;
+    }
+
+    /* ─── APP MOCKUP STRIP ─── */
+    .app-strip-wrap { background: var(--teal-bg); border-top: 1px solid var(--teal-mid); border-bottom: 1px solid var(--teal-mid); }
+    .app-strip {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 48px;
+      display: flex; align-items: center; gap: 64px;
+    }
+    .app-strip-text { flex: 1; }
+    .app-strip-text h2 { margin-bottom: 14px; }
+    .app-strip-text p { color: var(--text-sec); font-size: 16px; line-height: 1.65; margin-bottom: 28px; }
+    .btn-teal {
+      background: var(--teal); color: var(--white);
+      padding: 13px 26px; border-radius: 10px;
+      font-weight: 700; font-size: 15px;
+      text-decoration: none; display: inline-block;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(26,140,148,0.25);
+    }
+    .btn-teal:hover { background: #16787F; transform: translateY(-1px); }
+    .app-strip-img {
+      flex-shrink: 0; width: 260px; border-radius: 22px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(13,51,73,0.2), 0 0 0 1px rgba(26,140,148,0.15);
+    }
+    .app-strip-img img { width: 100%; display: block; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-section { padding: 100px 48px; background: var(--white); }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .how-header { text-align: center; margin-bottom: 56px; }
+    .how-header h2 { margin-bottom: 12px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .step-card {
+      background: var(--offwhite);
+      border: 1px solid var(--border);
+      border-radius: 18px; padding: 28px 24px;
+      transition: border-color .25s, box-shadow .25s, transform .2s;
+    }
+    .step-card:hover {
+      border-color: var(--teal-lt);
+      box-shadow: 0 8px 32px rgba(26,140,148,0.1);
+      transform: translateY(-3px);
+    }
+    .step-num {
+      width: 38px; height: 38px;
+      background: var(--teal); color: var(--white);
+      border-radius: 50%; font-weight: 900; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .step-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+    .step-card p { font-size: 13px; color: var(--text-sec); line-height: 1.6; }
+    .step-tag {
+      display: inline-block;
+      background: var(--teal-bg); color: var(--teal);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+      padding: 3px 8px; border-radius: 4px; margin-top: 14px;
+      border: 1px solid var(--teal-mid);
+    }
+
+    /* ─── PROBLEM ─── */
+    .pain-section { padding: 100px 48px; background: var(--offwhite); border-top: 1px solid var(--border); }
+    .pain-inner { max-width: 1100px; margin: 0 auto; }
+    .pain-intro { text-align: center; max-width: 580px; margin: 0 auto 52px; }
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pain-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 22px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .pain-card:hover { box-shadow: 0 6px 24px rgba(13,51,73,0.07); transform: translateY(-2px); }
+    .pain-icon { font-size: 26px; margin-bottom: 12px; }
+    .pain-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .pain-card p { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
+
+    /* ─── WHY POOLVIBE ─── */
+    .why-section { padding: 100px 48px; background: var(--white); border-top: 1px solid var(--border); }
+    .why-inner { max-width: 1100px; margin: 0 auto; }
+    .why-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
+    .why-callout {
+      background: linear-gradient(135deg, var(--teal-bg) 0%, var(--teal-mid) 100%);
+      border: 1px solid var(--teal-mid);
+      border-radius: 20px; padding: 36px 44px;
+      margin-bottom: 40px; text-align: center;
+    }
+    .why-callout p {
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.6; color: var(--navy); font-weight: 500;
+    }
+    .why-callout strong { color: var(--teal); }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .why-card {
+      background: var(--offwhite);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 26px 22px;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .why-card:hover { box-shadow: 0 6px 24px rgba(13,51,73,0.07); transform: translateY(-2px); }
+    .why-card .wicon { font-size: 26px; margin-bottom: 12px; }
+    .why-card h3 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .why-card p { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
+
+    /* ─── WHO IT'S FOR ─── */
+    .audience-section { padding: 100px 48px; background: var(--teal-bg); border-top: 1px solid var(--teal-mid); }
+    .audience-inner { max-width: 1100px; margin: 0 auto; }
+    .audience-header { text-align: center; max-width: 580px; margin: 0 auto 48px; }
+    .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .audience-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px;
+      box-shadow: 0 2px 12px rgba(13,51,73,0.05);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .audience-card:hover { box-shadow: 0 12px 40px rgba(13,51,73,0.1); transform: translateY(-2px); }
+    .aud-icon { font-size: 36px; margin-bottom: 16px; }
+    .audience-card h3 { font-size: 20px; font-weight: 800; color: var(--navy); margin-bottom: 12px; }
+    .audience-card > p { font-size: 14px; color: var(--text-sec); line-height: 1.65; margin-bottom: 20px; }
+    .aud-bullets { list-style: none; }
+    .aud-bullets li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: var(--text-sec); line-height: 1.5;
+      padding: 8px 0; border-top: 1px solid var(--border);
+    }
+    .aud-bullets li:first-child { border-top: none; padding-top: 0; }
+    .aud-dot { color: var(--teal); font-weight: 800; flex-shrink: 0; margin-top: 1px; }
+
+    /* ─── FOUNDER ─── */
+    .founder-section {
+      padding: 100px 48px;
+      background: var(--navy);
+    }
+    .founder-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .qmark { font-size: 72px; line-height: 0.6; color: var(--teal-lt); opacity: .4; margin-bottom: 24px; }
+    .founder-quote {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 500; line-height: 1.7; color: rgba(255,255,255,0.9);
+      margin-bottom: 36px;
+    }
+    .founder-quote em { color: #7EEEF3; font-style: normal; }
+    .founder-byline {
+      display: flex; align-items: center; justify-content: center; gap: 14px;
+    }
+    .founder-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--teal); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 18px; color: var(--white);
+    }
+    .founder-name { font-weight: 700; font-size: 15px; color: var(--white); text-align: left; }
+    .founder-title { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+    /* ─── BETA FORM ─── */
+    #beta {
+      padding: 100px 48px;
+      background: var(--offwhite);
+      border-top: 1px solid var(--border);
+    }
+    .form-wrap {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px; padding: 56px 52px;
+      max-width: 600px; margin: 0 auto;
+      box-shadow: 0 8px 48px rgba(13,51,73,0.08);
+    }
+    .form-wrap .section-label { margin-bottom: 10px; }
+    .form-wrap h2 { font-size: 30px; margin-bottom: 10px; }
+    .form-intro { color: var(--text-sec); font-size: 15px; margin-bottom: 32px; line-height: 1.6; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    label { font-size: 11px; font-weight: 700; color: var(--text-sec); letter-spacing: 0.8px; text-transform: uppercase; }
+    input, select, textarea {
+      background: var(--offwhite);
+      border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text); font-size: 15px;
+      padding: 12px 16px; width: 100%;
+      outline: none; transition: border-color .2s, box-shadow .2s;
+      -webkit-appearance: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(26,140,148,0.1);
+      background: var(--white);
+    }
+    textarea { resize: vertical; min-height: 88px; }
+    .submit-btn {
+      width: 100%; margin-top: 4px;
+      background: var(--teal); color: var(--white);
+      padding: 16px; border: none; border-radius: 10px;
+      font-weight: 800; font-size: 16px; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(26,140,148,0.3);
+      transition: background .2s, transform .15s;
+    }
+    .submit-btn:hover { background: #16787F; transform: translateY(-1px); }
+    .form-note { font-size: 12px; color: var(--text-sec); opacity: .7; text-align: center; margin-top: 14px; }
+    .success-msg { display: none; text-align: center; padding: 20px 0; }
+    .success-icon { font-size: 56px; margin-bottom: 16px; }
+    .success-msg h3 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .success-msg p { color: var(--text-sec); font-size: 15px; line-height: 1.6; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 36px 48px; background: var(--navy);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 8px; }
+    .footer-logo img { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
+    .footer-logo-text { font-size: 16px; font-weight: 900; color: var(--white); }
+    .footer-logo-text em { color: var(--teal-lt); font-style: normal; }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.45); }
+    footer a { color: var(--teal-lt); text-decoration: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1000px) {
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 860px) {
+      nav { padding: 12px 20px; }
+      .nav-links .nav-link { display: none; }
+      .hero-content { padding: 80px 24px 60px; }
+      .app-strip { flex-direction: column; padding: 60px 24px; }
+      .app-strip-img { width: 100%; max-width: 280px; margin: 0 auto; }
+      .how-section, .pain-section, .why-section, .audience-section, .founder-section, #beta { padding: 72px 24px; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .form-wrap { padding: 36px 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; padding: 32px 24px; }
+      .why-callout { padding: 28px 24px; }
+    }
+    @media (max-width: 560px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo.png" alt="PoolVibe" />
+    <span class="nav-logo-text">Pool<em>Vibe</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#why" class="nav-link">Why PoolVibe</a>
+    <a href="#beta" class="nav-link">Beta</a>
+    <a href="#beta" class="nav-btn">Join Beta →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="badge">🏊 Now accepting beta testers</div>
+    <h1>Know exactly what<br>to add, what to buy,<br>and when your pool service<br>is <span class="accent">getting it wrong.</span></h1>
+    <p class="hero-sub">PoolVibe helps pool owners use photos, test strip readings, symptoms, and maintenance reports to get clear chemical guidance and smarter shopping recommendations.</p>
+    <p class="hero-sub2">Built for DIY owners and pool owners who want to double-check their maintenance reports.</p>
+    <div class="hero-ctas">
+      <a href="#beta" class="btn-primary">Join the Beta →</a>
+      <a href="#how" class="btn-ghost">See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-num">Free</div>
+        <div class="hstat-label">Affiliate model</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APP MOCKUP -->
+<div class="app-strip-wrap">
+  <div class="app-strip">
+    <div class="app-strip-text">
+      <div class="section-label">The app</div>
+      <h2>A smart pool operator<br>in your pocket</h2>
+      <p>Build your pool profile once from photos and a few questions. Every week, enter your readings or upload your service report — and get back an exact plan: what to add, how much, in what order, and exactly what to buy.</p>
+      <a href="#beta" class="btn-teal">Get Early Access →</a>
+    </div>
+    <div class="app-strip-img">
+      <img src="app-preview.jpg" alt="PoolVibe app showing pool chemistry dashboard" loading="lazy" />
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <div class="section-label">How it works</div>
+      <h2>From test strip to action plan<br>in four steps</h2>
+      <p class="section-sub" style="max-width:500px; margin: 12px auto 0;">You don't need to know your gallons. PoolVibe estimates your pool size from photos and guided questions.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Upload pool photos and create your profile</h3>
+        <p>Share photos of your pool and answer a few guided questions. PoolVibe estimates your pool size — no guessing your gallon count.</p>
+        <span class="step-tag">POOL PROFILE</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Enter strip values, symptoms, or reports</h3>
+        <p>Input your test strip readings, describe what you're seeing, or upload a service report. PoolVibe takes it from there.</p>
+        <span class="step-tag">CONDITION INTAKE</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Get a clear action plan with exact dosing</h3>
+        <p>Specific chemicals, specific amounts, in the right order — with timing notes so you don't waste product or undo your own work.</p>
+        <span class="step-tag">ACTION PLAN</span>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Track history and catch bad maintenance</h3>
+        <p>See your pool's condition over time. Compare maintenance reports against what your pool actually needed and catch underdosing early.</p>
+        <span class="step-tag">MAINTENANCE OVERSIGHT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="pain-section">
+  <div class="pain-inner">
+    <div class="pain-intro">
+      <div class="section-label">The problem</div>
+      <h2>Pool care shouldn't feel like guesswork</h2>
+      <p class="section-sub">Every pool owner has been there — staring at a test strip, unsure what to add, hoping the pool store gets it right.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">🧪</div>
+        <h3>Test strips don't tell you what to do next</h3>
+        <p>You read the colors, but then what? Most owners are left guessing how much of what to add — and the label math assumes you know your gallons.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📐</div>
+        <h3>Most owners don't know their pool gallons</h3>
+        <p>Without an accurate volume estimate, every chemical calculation is off. You can be wrong by 20% before you even open a bottle.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🛒</div>
+        <h3>Chemical buying is a guessing game</h3>
+        <p>Pool store apps and calculators don't know your pool. You end up buying too much, too little, or the wrong product entirely.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📋</div>
+        <h3>Maintenance companies can cut corners</h3>
+        <p>Weekly service doesn't always mean thorough service. Underdosing is common — and you'd never know from the invoice.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">⏱️</div>
+        <h3>Chemical order matters — most get it wrong</h3>
+        <p>Add shock before lowering pH and you waste half of it. Sequence matters, and no one tells you this at the pool store.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">💸</div>
+        <h3>Wrong decisions add up fast</h3>
+        <p>Wrong chemicals, wrong quantities, and bad advice compound into real money — and a pool that never quite looks right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY POOLVIBE -->
+<section class="why-section" id="why">
+  <div class="why-inner">
+    <div class="why-header">
+      <div class="section-label">Why PoolVibe</div>
+      <h2>More than a calculator.<br>More useful than a pool store app.</h2>
+    </div>
+    <div class="why-callout">
+      <p><strong>Pool calculators only do math.</strong> Pool store apps only sell products. <strong>PoolVibe combines everything</strong> — your pool's profile, current condition, exact dosing, product recommendations, and maintenance oversight — into one clear system built for pool owners, not pool stores.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="wicon">📸</div>
+        <h3>Profile from photos, not guesses</h3>
+        <p>PoolVibe estimates your gallon count from pool photos and guided questions. Every recommendation is built on your actual pool.</p>
+      </div>
+      <div class="why-card">
+        <div class="wicon">🔬</div>
+        <h3>Exact dosing, right order</h3>
+        <p>Not just "add some shock." Specific amounts, specific products, in the right sequence — with timing notes that protect your results.</p>
+      </div>
+      <div class="why-card">
+        <div class="wicon">🛒</div>
+        <h3>Product picks tied to your condition</h3>
+        <p>Two or three recommendations based on what your water actually needs — with direct buying links and no upsell padding.</p>
+      </div>
+      <div class="why-card">
+        <div class="wicon">🔍</div>
+        <h3>Maintenance report review</h3>
+        <p>Upload your service report. PoolVibe tells you if the amounts added match what your pool size and condition actually required.</p>
+      </div>
+      <div class="why-card">
+        <div class="wicon">📆</div>
+        <h3>Track week over week</h3>
+        <p>Every session is saved. See how your pool responds over time and spot patterns before they become expensive problems.</p>
+      </div>
+      <div class="why-card">
+        <div class="wicon">🆓</div>
+        <h3>Free to use</h3>
+        <p>PoolVibe is free for pool owners. Revenue comes from affiliate product links — we only recommend what your pool actually needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="audience-section">
+  <div class="audience-inner">
+    <div class="audience-header">
+      <div class="section-label">Who it's for</div>
+      <h2>Whether you do it yourself<br>or pay someone else</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="aud-icon">🔧</div>
+        <h3>DIY Pool Owners</h3>
+        <p>You handle the pool yourself. You buy the chemicals, run the tests, and make the calls. PoolVibe gives you the clarity to do it right.</p>
+        <ul class="aud-bullets">
+          <li><span class="aud-dot">→</span> Save money buying the right chemicals in the right amounts</li>
+          <li><span class="aud-dot">→</span> Gain confidence with clear, step-by-step guidance</li>
+          <li><span class="aud-dot">→</span> Stop relying on pool store advice that doesn't know your pool</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">📋</div>
+        <h3>Managed Pool Owners</h3>
+        <p>You pay a maintenance company to handle it. But you want to know they're actually doing it right — not running a generic route.</p>
+        <ul class="aud-bullets">
+          <li><span class="aud-dot">→</span> Verify your service company is dosing correctly for your pool size</li>
+          <li><span class="aud-dot">→</span> Catch underdosing and lazy maintenance before it costs you</li>
+          <li><span class="aud-dot">→</span> Get oversight without needing to become a pool chemistry expert</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section">
+  <div class="founder-inner">
+    <div class="qmark">"</div>
+    <p class="founder-quote">I have my own pool. I've had cloudy water I couldn't explain, maintenance reports I couldn't verify, and a garage full of chemicals I wasn't sure I was using right. <em>AI helped me solve a pool problem in 10 minutes that had been recurring for weeks.</em> That's what PoolVibe is — that help, built into an app, available every week.<br><br>This isn't a side project. It's a focused tool for a specific problem — and I got tired of staring at test strips and hoping for the best.</p>
+    <div class="founder-byline">
+      <div class="founder-avatar">A</div>
+      <div>
+        <div class="founder-name">Angela</div>
+        <div class="founder-title">Founder, PoolVibe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BETA FORM -->
+<section id="beta">
+  <div class="form-wrap">
+    <div class="section-label">Early access</div>
+    <h2>Get early access<br>to PoolVibe</h2>
+    <p class="form-intro">Join the beta and be first to try a smarter way to manage your pool. No commitments, no spam.</p>
+    <form id="betaForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">Your name</label>
+          <input type="text" id="fname" name="name" placeholder="Angela" required />
+        </div>
+        <div class="form-group">
+          <label for="femail">Email address</label>
+          <input type="email" id="femail" name="email" placeholder="you@email.com" required />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fstate">State</label>
+          <input type="text" id="fstate" name="state" placeholder="Florida" />
+        </div>
+        <div class="form-group">
+          <label for="fpooltype">Pool type</label>
+          <select id="fpooltype" name="pooltype">
+            <option value="">Select one</option>
+            <option value="saltwater">Saltwater</option>
+            <option value="chlorine">Chlorine</option>
+            <option value="unsure">Not sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="fown">How do you manage your pool?</label>
+        <select id="fown" name="ownership">
+          <option value="">Select one</option>
+          <option value="diy">I do it myself (DIY)</option>
+          <option value="company">I pay a maintenance company</option>
+          <option value="both">Mix of both</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="ffrustration">Biggest pool-care frustration</label>
+        <textarea id="ffrustration" name="frustration" placeholder="Cloudy water that keeps coming back, not trusting my service reports, not knowing how much to add..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Join the Beta →</button>
+      <p class="form-note">No spam. No commitments. Early access when we're ready.</p>
+    </form>
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✅</div>
+      <h3>You're on the list.</h3>
+      <p>PoolVibe is being built to make pool care less confusing and more exact.<br>We'll reach out when early access is ready.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="PoolVibe" />
+    <span class="footer-logo-text">Pool<em>Vibe</em></span>
+  </div>
+  <p>© 2026 PoolVibe LLC · <a href="mailto:hello@pool-vibe.com">hello@pool-vibe.com</a></p>
+  <p style="font-size:11px; opacity:.35;">Beta interest only. Product in development.</p>
+</footer>
+
+<script>
+  document.getElementById('betaForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    const email       = document.getElementById('femail').value.trim();
+    const firstName   = document.getElementById('fname').value.trim().split(' ')[0];
+    const state       = document.getElementById('fstate').value.trim();
+    const pooltype    = document.getElementById('fpooltype').value;
+    const ownership   = document.getElementById('fown').value;
+    const frustration = document.getElementById('ffrustration').value.trim();
+
+    try {
+      // Subscribe via Kit v4 API — tag: PoolVibe Beta (id 19625998)
+      const res = await fetch('https://api.kit.com/v4/subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Kit-Api-Key': 'kit_f4a5279d2b2b75bdc5c0bf3d47e04bf3'
+        },
+        body: JSON.stringify({
+          email_address: email,
+          first_name: firstName,
+          tag_ids: [19625998],
+          fields: {
+            state: state,
+            pool_type: pooltype,
+            ownership: ownership,
+            biggest_frustration: frustration
+          }
+        })
+      });
+
+      if (res.ok) {
+        document.getElementById('betaForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        throw new Error('API error ' + res.status);
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Join the Beta →';
+      alert('Something went wrong — please try again or email hello@pool-vibe.com');
+    }
+  });
+</script>
+</body>
+</html>
