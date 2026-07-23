@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Recommended Products — PoolVibe</title>
+  <meta name="description" content="Pool gear that actually works. Curated by the PoolVibe community — test kits, robotic cleaners, pumps, accessories and more." />
+  <meta property="og:title" content="Top Recommended Products — PoolVibe" />
+  <meta property="og:description" content="Pool gear, actually worth buying. Vetted by pool owners who know their chemistry." />
+  <meta property="og:image" content="hero.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080C10;
+      --bg-2:      #0D1117;
+      --bg-3:      #111820;
+      --aqua:      #00E5CC;
+      --aqua-dim:  rgba(0, 229, 204, 0.12);
+      --aqua-dark: #00B8A3;
+      --white:     #FFFFFF;
+      --muted:     rgba(255,255,255,0.50);
+      --muted-2:   rgba(255,255,255,0.25);
+      --border:    rgba(255,255,255,0.07);
+      --card-bg:   #0F1923;
+      --card-border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(8, 12, 16, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      gap: 24px;
+    }
+
+    .nav-wordmark {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .nav-wordmark span { color: var(--aqua); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a.active {
+      color: var(--aqua);
+      font-weight: 600;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--aqua);
+      color: #080C10;
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 580px;
+      display: flex;
+      align-items: center;
+      margin-top: 72px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('store-hero.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(8,12,16,0.92) 0%,
+        rgba(8,12,16,0.75) 45%,
+        rgba(8,12,16,0.20) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 48px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--aqua-dim);
+      border: 1px solid rgba(0,229,204,0.2);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--aqua);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 600px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--aqua);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--aqua);
+      color: #080C10;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .app-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 8px 16px;
+      text-decoration: none;
+      color: var(--white);
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .app-badge:hover { background: rgba(255,255,255,0.14); }
+    .app-badge svg { width: 18px; height: 18px; fill: var(--white); flex-shrink: 0; }
+
+    /* ─── TRUST STRIP ─── */
+    .trust-strip {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+    .trust-item strong { color: var(--white); }
+    .trust-icon { color: var(--aqua); font-size: 1.1rem; }
+
+    /* ─── MAIN CONTENT ─── */
+    .store-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+
+    /* ─── SEARCH + FILTERS ─── */
+    .search-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    #searchInput {
+      width: 100%;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px 12px 42px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #searchInput:focus { border-color: var(--aqua); }
+    #searchInput::placeholder { color: var(--muted-2); }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .filter-tab:hover { border-color: var(--aqua); color: var(--white); }
+    .filter-tab.active {
+      background: var(--aqua);
+      border-color: var(--aqua);
+      color: #080C10;
+      font-weight: 700;
+    }
+
+    /* ─── CATEGORY HERO TILES ─── */
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+
+    .category-tiles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+
+    .category-tile {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 3/2;
+      cursor: pointer;
+      transition: transform 0.25s;
+      text-decoration: none;
+    }
+    .category-tile:hover { transform: translateY(-4px); }
+
+    .category-tile-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.4s;
+    }
+    .category-tile:hover .category-tile-bg { transform: scale(1.05); }
+
+    .category-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8,12,16,0.1) 0%, rgba(8,12,16,0.75) 100%);
+    }
+
+    .category-tile-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      z-index: 2;
+    }
+
+    .category-tile-count {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+    }
+
+    .category-tile-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--aqua);
+      color: #080C10;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      z-index: 3;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── PRODUCT GRID ─── */
+    .products-section {
+      margin-bottom: 64px;
+    }
+
+    .products-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .products-count {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,229,204,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .product-card.hidden { display: none; }
+
+    .product-img-wrap {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #0A1520;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+      transition: transform 0.3s;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.04); }
+
+    .product-img-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--aqua-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+    }
+
+    .pick-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--aqua);
+      color: #080C10;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .product-body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+
+    .product-category-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--aqua);
+    }
+
+    .product-brand {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .product-name {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--white);
+    }
+
+    .product-hook {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .star-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 2px;
+    }
+
+    .star {
+      width: 14px;
+      height: 14px;
+      color: rgba(255,255,255,0.2);
+    }
+    .star.filled { color: #FFB800; }
+    .star.half { color: #FFB800; opacity: 0.5; }
+
+    .star-label {
+      font-size: 0.78rem;
+      color: var(--muted-2);
+    }
+
+    .product-footer {
+      padding: 0 18px 18px;
+    }
+
+    .btn-amazon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: var(--aqua);
+      color: #080C10;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-amazon:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-amazon svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ─── NO RESULTS ─── */
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--muted);
+    }
+    .no-results h3 {
+      font-size: 1.2rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    /* ─── DISCLAIMER ─── */
+    .disclaimer {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 60px;
+    }
+    .disclaimer strong { color: var(--white); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 48px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-brand span { color: var(--aqua); }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-links a.highlight { color: var(--aqua); font-weight: 600; }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted-2);
+      width: 100%;
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero-content { padding: 60px 24px; }
+      .store-main { padding: 40px 24px 80px; }
+      .trust-strip { padding: 16px 24px; gap: 24px; }
+      .category-tiles { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 32px 24px; }
+    }
+
+    @media (max-width: 580px) {
+      .hero { min-height: 480px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .app-badges { flex-wrap: wrap; }
+      .category-tiles { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: 1fr; }
+      .search-filter-bar { flex-direction: column; align-items: stretch; }
+      .filter-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <a href="index.html" class="nav-wordmark">Pool<span>Vibe</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="store.html" class="active">Top Recommended Products</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#download" class="nav-cta">Get the App</a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#00E5CC" opacity="0.3"/><circle cx="6" cy="6" r="3" fill="#00E5CC"/></svg>
+        PoolVibe Picks
+      </div>
+      <h1>Pool gear, <em>actually</em><br>worth buying</h1>
+      <p class="hero-sub">Every product here is vetted by the PoolVibe community. We only recommend what actually works — no sponsored junk, no guessing.</p>
+      <div class="hero-actions">
+        <a href="#products" class="btn-primary">
+          Browse All Gear
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="app-badges" id="download">
+          <a href="#" class="app-badge" title="Coming soon to the App Store">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="#" class="app-badge" title="Coming soon to Google Play">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3.18 23.76c.3.17.64.24.99.2l12.76-11.9L13.06 8.2 3.18 23.76zm16.52-10.37L16.6 11.5l-3.5 3.26 3.43 3.43 3.19-1.8a1.49 1.49 0 000-2.99zM2.08 1.3a1.5 1.5 0 00-.08.5v20.4c0 .17.03.34.08.5l.07.06L14.7 10.1v-.3L2.15 1.25l-.07.05zm10.98 9.86l-9.98-9.3 12.68 7.44-2.7 1.86z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TRUST STRIP ─── -->
+  <div class="trust-strip">
+    <div class="trust-item">
+      <span class="trust-icon">✓</span>
+      <span><strong>Community vetted</strong> — real pool owners</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">✓</span>
+      <span><strong>No sponsored picks</strong> — only what works</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">✓</span>
+      <span><strong>4.3+ stars, 500+ reviews</strong> minimum standard</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-icon">✓</span>
+      <span><strong>Updated regularly</strong> by our team</span>
+    </div>
+  </div>
+
+  <!-- ─── MAIN STORE ─── -->
+  <main class="store-main">
+
+    <!-- FEATURED CATEGORIES -->
+    <div>
+      <div class="section-label">Shop by Category</div>
+      <h2 class="section-title">Find what you need</h2>
+      <p class="section-sub">Start with the essentials, then explore everything your pool needs.</p>
+
+      <div class="category-tiles">
+        <a href="#products" class="category-tile" onclick="filterCategory('Chemicals & Testing')">
+          <div class="category-tile-bg" style="background-image: url('https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80'); background-color:#0A2030;"></div>
+          <div class="category-tile-overlay"></div>
+          <span class="category-tile-badge">Essential</span>
+          <div class="category-tile-label">
+            Chemicals & Testing
+            <span class="category-tile-count">10 products</span>
+          </div>
+        </a>
+        <a href="#products" class="category-tile" onclick="filterCategory('Equipment & Maintenance')">
+          <div class="category-tile-bg" style="background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80'); background-color:#0A2030;"></div>
+          <div class="category-tile-overlay"></div>
+          <span class="category-tile-badge">Top Pick</span>
+          <div class="category-tile-label">
+            Robotic Cleaners & Equipment
+            <span class="category-tile-count">13 products</span>
+          </div>
+        </a>
+        <a href="#products" class="category-tile" onclick="filterCategory('Cleaning Supplies')">
+          <div class="category-tile-bg" style="background-image: url('https://images.unsplash.com/photo-1530549387789-4c1017266635?w=600&q=80'); background-color:#0A1A20;"></div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-label">
+            Cleaning Supplies
+            <span class="category-tile-count">6 products</span>
+          </div>
+        </a>
+        <a href="#products" class="category-tile" onclick="filterCategory('Accessories')">
+          <div class="category-tile-bg" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80'); background-color:#0A1525;"></div>
+          <div class="category-tile-overlay"></div>
+          <div class="category-tile-label">
+            Accessories
+            <span class="category-tile-count">8 products</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- SEARCH + FILTER -->
+    <div class="search-filter-bar" id="products">
+      <div class="search-wrap">
+        <span class="search-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </span>
+        <input type="text" id="searchInput" placeholder="Search products, brands…" oninput="filterProducts()" />
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterTab(this,'all')">All Products</button>
+        <button class="filter-tab" onclick="filterTab(this,'Chemicals & Testing')">Chemicals & Testing</button>
+        <button class="filter-tab" onclick="filterTab(this,'Equipment & Maintenance')">Equipment</button>
+        <button class="filter-tab" onclick="filterTab(this,'Cleaning Supplies')">Cleaning</button>
+        <button class="filter-tab" onclick="filterTab(this,'Pool Toys & Fun')">Toys & Fun</button>
+        <button class="filter-tab" onclick="filterTab(this,'Poolside Furniture')">Furniture</button>
+        <button class="filter-tab" onclick="filterTab(this,'Accessories')">Accessories</button>
+        <button class="filter-tab" onclick="filterTab(this,'Safety')">Safety</button>
+        <button class="filter-tab" onclick="filterTab(this,'Seasonal')">Seasonal</button>
+      </div>
+    </div>
+
+    <!-- PRODUCT GRID -->
+    <div class="products-section">
+      <div class="products-header">
+        <div>
+          <div class="section-label">PoolVibe Picks</div>
+          <h2 class="section-title">All Recommended Products</h2>
+        </div>
+        <span class="products-count" id="productsCount">57 products</span>
+      </div>
+
+      <div class="product-grid" id="productGrid">
+        <!-- Products injected by JS -->
+      </div>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer">
+      <strong>Affiliate disclosure:</strong> Some links on this page may earn PoolVibe a small commission at no extra cost to you. We only recommend products that meet our 4.3-star, 500-review minimum — or that the PoolVibe community has specifically vetted. Your trust matters more than any commission.
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-brand">Pool<span>Vibe</span></a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="store.html" class="highlight">Top Recommended Products</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="footer-copy">© 2026 PoolVibe. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // ─── PRODUCT DATA ───
+    const products = [
+      // CHEMICALS & TESTING
+      { id:1, category:"Chemicals & Testing", brand:"Taylor Technologies", name:"Taylor K-2006C Complete Pool Water Test Kit", hook:"Reference-grade reagents — the community gold-standard drop kit. The one pros actually use.", img:"https://m.media-amazon.com/images/I/71m5j1+m5nL._AC_SL1500_.jpg", pick:true, stars:4.8, reviews:"9,500+", url:"https://www.amazon.com/dp/B0002IXIJ0" },
+      { id:2, category:"Chemicals & Testing", brand:"Taylor Technologies", name:"Taylor R-0871 FAS-DPD Chlorine Reagent Refill", hook:"Consumable refill for the K-2006C. Repeat-buy basket item — stock two.", img:"https://m.media-amazon.com/images/I/61jGrpJmCEL._AC_SL1000_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/dp/B0002IW2WK" },
+      { id:3, category:"Chemicals & Testing", brand:"Orenda", name:"Orenda CV-700 Enzyme & Phosphate Remover", hook:"Enzyme + phosphate combo with a strong water-chemistry-nerd following. Problem-solver, not a weekly staple.", img:"https://images.squarespace-cdn.com/content/v1/5b4c1c29372b96c2d5b85f10/1558471946027-YJWBJ9IRLKH3FZRJ2WOF/CV-700.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=orenda+cv-700" },
+      { id:4, category:"Chemicals & Testing", brand:"Natural Chemistry", name:"Natural Chemistry PhosFree Phosphate Remover", hook:"Widely trusted phosphate remover. Helps salt water generator cells run efficiently.", img:"https://m.media-amazon.com/images/I/71xP9ysrJIL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=natural+chemistry+phosfree" },
+      { id:5, category:"Chemicals & Testing", brand:"Pentair Rainbow", name:"Pentair Rainbow 320 In-Line Automatic Chlorinator", hook:"Set-and-forget inline chlorinator. Tabs feed automatically — no daily dosing.", img:"https://pentairpool.com/content/dam/pentair-pool/products/chemical-feeders/rainbow-320/rainbow-320-chlorinator.png", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=pentair+rainbow+320+chlorinator" },
+      { id:6, category:"Chemicals & Testing", brand:"Various", name:"3\" Trichlor Chlorine Tabs — Bulk Pail", hook:"Stabilized tabs for inline chlorinators or floaters. Buy in a 25-50 lb pail for best value.", img:"https://m.media-amazon.com/images/I/71TIoF3l0ZL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=trichlor+chlorine+tabs+50+lb+pail" },
+      { id:7, category:"Chemicals & Testing", brand:"SeaKlear", name:"SeaKlear Chitosan Natural Clarifier", hook:"Fast-acting clarifier for cloudy water. Chitosan-based — gentler than synthetic alternatives.", img:"https://m.media-amazon.com/images/I/61v3GrMQkwL._AC_SL1000_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=seaklear+clarifier" },
+      { id:8, category:"Chemicals & Testing", brand:"Jack's Magic", name:"Jack's Magic 'The Yellow Stuff' Algaecide", hook:"Effective non-foaming algaecide trusted by pool pros for mustard and yellow algae.", img:"https://m.media-amazon.com/images/I/71a7z0lMDlL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=jacks+magic+yellow+stuff" },
+      { id:9, category:"Chemicals & Testing", brand:"Morton / Diamond Crystal", name:"Pool Salt for Salt Water Generators — 40 lb Bags", hook:"High-purity pool salt for SWG pools. Buy in bulk — you'll go through it every season.", img:"https://m.media-amazon.com/images/I/81j5PuHYJFL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=pool+salt+40+lb" },
+      { id:10, category:"Chemicals & Testing", brand:"Jack's Magic", name:"Jack's Magic 'The Pink Stuff' Stain Solution", hook:"Pre-treat & stain remover for mineral staining common in hard water areas.", img:"https://m.media-amazon.com/images/I/71fhA-6IlKL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=jacks+magic+pink+stuff" },
+
+      // EQUIPMENT & MAINTENANCE
+      { id:11, category:"Equipment & Maintenance", brand:"Maytronics (Dolphin)", name:"Dolphin Nautilus CC Plus Robotic Cleaner", hook:"#1-ranked robotic brand 2026. Best support and warranty in the category. Set it and forget it.", img:"https://www.maytronics.com/content/dam/maytronics/en-us/products/nautilus-cc-plus/dolphin-nautilus-cc-plus.png", pick:true, stars:4.5, reviews:"12,000+", url:"https://www.amazon.com/s?k=dolphin+nautilus+cc+plus" },
+      { id:12, category:"Equipment & Maintenance", brand:"Maytronics (Dolphin)", name:"Dolphin Premier Robotic Cleaner", hook:"Multi-media filtration, large debris capacity. Handles leaves, fine dirt, and algae in one pass.", img:"https://www.maytronics.com/content/dam/maytronics/en-us/products/premier/dolphin-premier.png", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=dolphin+premier+robotic+pool+cleaner" },
+      { id:13, category:"Equipment & Maintenance", brand:"Betta", name:"Betta SE Plus Solar-Powered Robotic Pool Skimmer", hook:"Solar-powered surface skimmer — runs itself, zero operating cost. Removes leaves before they sink.", img:"https://m.media-amazon.com/images/I/71-VdPsNXwL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=betta+se+plus+solar+pool+skimmer" },
+      { id:14, category:"Equipment & Maintenance", brand:"Aiper", name:"Aiper Scuba N1 Cordless Robotic Pool Vacuum", hook:"Cordless freedom, no tangling hose. Great mid-range option for smaller pools.", img:"https://m.media-amazon.com/images/I/71a9QK4G0LL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=aiper+scuba+n1" },
+      { id:15, category:"Equipment & Maintenance", brand:"Beatbot", name:"Beatbot AquaSense 2 Cordless Robotic Pool Vacuum", hook:"Premium cordless cleaner with AI obstacle avoidance. Cleans walls and waterline too.", img:"https://m.media-amazon.com/images/I/71p-xYOGKIL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=beatbot+aquasense+2" },
+      { id:16, category:"Equipment & Maintenance", brand:"Sun2Solar", name:"Sun2Solar Solar Cover / Bubble Blanket", hook:"Cuts heat loss by up to 70%. Pays for itself in heating costs within one season.", img:"https://m.media-amazon.com/images/I/71vYwlUKr+L._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=sun2solar+solar+cover" },
+      { id:17, category:"Equipment & Maintenance", brand:"Pleatco", name:"Pleatco Advanced Replacement Filter Cartridge", hook:"Top aftermarket filter brand. Direct drop-in replacement — shop by your filter model.", img:"https://m.media-amazon.com/images/I/71kJiHqnNoL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=pleatco+replacement+filter+cartridge" },
+      { id:18, category:"Equipment & Maintenance", brand:"Little Giant", name:"Little Giant APCP-1700 Automatic Pool Cover Pump", hook:"Removes standing water from pool covers automatically. Saves your cover and your liner.", img:"https://m.media-amazon.com/images/I/71-4mf0QKLL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=little+giant+pool+cover+pump" },
+
+      // CLEANING SUPPLIES
+      { id:19, category:"Cleaning Supplies", brand:"Purity Pool", name:"Purity Pool ULTD Professional Leaf Rake", hook:"Pro-grade aluminum frame, big bag. The rake service techs actually carry on their trucks.", img:"https://m.media-amazon.com/images/I/61Ln+IKCJUL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=purity+pool+ULTD+leaf+rake" },
+      { id:20, category:"Cleaning Supplies", brand:"Wall Whale", name:"Wall Whale 18\" Weighted Pool Brush", hook:"Weighted for better wall contact. Cleans algae off walls in far fewer strokes.", img:"https://m.media-amazon.com/images/I/71kXKpXO6OL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=wall+whale+pool+brush" },
+      { id:21, category:"Cleaning Supplies", brand:"Poolmaster", name:"Poolmaster Weighted Flex Vacuum Head + 30' Hose", hook:"Flex neck fits any shape pool floor. The 30' USA hose is notably tangle-resistant.", img:"https://m.media-amazon.com/images/I/71XJXU-vAKL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=poolmaster+vacuum+head+hose" },
+      { id:22, category:"Cleaning Supplies", brand:"Various", name:"Skimmer Socks — Fine Mesh Multipack", hook:"Catches fine debris before it clogs your filter. Buy a multipack — you'll use them constantly.", img:"https://m.media-amazon.com/images/I/71VY0lhXTTL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=pool+skimmer+socks+multipack" },
+
+      // POOL TOYS & FUN
+      { id:23, category:"Pool Toys & Fun", brand:"Big Joe", name:"Big Joe Captain's Float / Aquaria Lounger", hook:"Bean-filled (no inflation needed), double-stitched, USA-made. Doesn't go flat mid-summer.", img:"https://m.media-amazon.com/images/I/81p1A3P2DXL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=big+joe+pool+float" },
+      { id:24, category:"Pool Toys & Fun", brand:"Watermelon Ball", name:"Watermelon Ball Pool Game", hook:"Sinks, bounces underwater, and you can pass it. The most fun you'll have in a pool. Period.", img:"https://m.media-amazon.com/images/I/71cS8VIlQFL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=watermelon+ball+pool+game" },
+      { id:25, category:"Pool Toys & Fun", brand:"SwimWays", name:"SwimWays Dive Sticks / Rings Set", hook:"Classic dive toy set. Great for kids learning to swim underwater — sinks in 3–5 ft.", img:"https://m.media-amazon.com/images/I/81B5A5MGKIL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=swimways+dive+sticks+rings" },
+      { id:26, category:"Pool Toys & Fun", brand:"Dunn-Rite", name:"Dunn-Rite PoolSport Stainless Basketball & Volleyball Combo", hook:"Stainless steel, no rust ever. The one game set that survives 10+ pool seasons.", img:"https://m.media-amazon.com/images/I/61YCBU2w7UL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=dunn-rite+poolsport+basketball" },
+      { id:27, category:"Pool Toys & Fun", brand:"GoSports", name:"GoSports Splash Hoop 2-in-1 Pool Basketball Set", hook:"Floating basketball meets pool sport — adjustable height, great for all ages.", img:"https://m.media-amazon.com/images/I/71zOkjpHpJL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=gosports+splash+hoop" },
+
+      // POOLSIDE FURNITURE
+      { id:28, category:"Poolside Furniture", brand:"POLYWOOD", name:"POLYWOOD Nautical Chaise Lounge", hook:"HDPE poly-lumber, USA-made, 20-year residential warranty. Chlorine, salt, and UV rated.", img:"https://m.media-amazon.com/images/I/81c1jVe4OdL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=polywood+chaise+lounge" },
+      { id:29, category:"Poolside Furniture", brand:"POLYWOOD", name:"POLYWOOD Long Island Side Table", hook:"Matching HDPE side table — holds your drinks without wobbling or rotting.", img:"https://m.media-amazon.com/images/I/71F5nH0yOLL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=polywood+side+table" },
+      { id:30, category:"Poolside Furniture", brand:"Purple Leaf", name:"Purple Leaf Cantilever Offset Patio Umbrella", hook:"Offset design means no pole in the middle of your seating. 360° rotation, crank lift.", img:"https://m.media-amazon.com/images/I/81YXb+aTLGL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=purple+leaf+cantilever+umbrella" },
+
+      // ACCESSORIES
+      { id:31, category:"Accessories", brand:"Ultimate Ears", name:"Ultimate Ears WONDERBOOM 4", hook:"IP67 waterproof, actually floats if dropped in the pool. Repeated poolside speaker recommendation.", img:"https://m.media-amazon.com/images/I/61gIGCRKHkL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=ultimate+ears+wonderboom+4" },
+      { id:32, category:"Accessories", brand:"YETI", name:"YETI Roadie 24 / Tundra 45 Cooler", hook:"Stays cold 24–48 hrs. Bear-certified, UV-resistant shell. The cooler that outlasts everyone.", img:"https://m.media-amazon.com/images/I/71w8GXbqvuL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=yeti+roadie+cooler" },
+      { id:33, category:"Accessories", brand:"YETI", name:"YETI Rambler Tumbler with MagSlider Lid", hook:"Keeps cold drinks cold for hours poolside. The MagSlider lid doesn't flick open in your bag.", img:"https://m.media-amazon.com/images/I/71lqMIBhAQL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=yeti+rambler+tumbler" },
+      { id:34, category:"Accessories", brand:"Ambient Weather", name:"Digital Floating Wireless Pool Thermometer", hook:"Reads pool temp from your phone. Never squint at a floating dial again.", img:"https://m.media-amazon.com/images/I/71OD-cXRe9L._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=digital+pool+thermometer+wireless" },
+      { id:35, category:"Accessories", brand:"Suncast / Keter", name:"Resin Deck Storage Box — Poolside", hook:"UV-resistant resin, no rust ever. Stores toys, floats, and chemicals out of sight.", img:"https://m.media-amazon.com/images/I/71cLnq6fRnL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=keter+deck+storage+box" },
+      { id:36, category:"Accessories", brand:"Various", name:"Floating LED Pool Lights — Rechargeable Color Set", hook:"Transforms evening swims. Rechargeable, no wiring, color-change remote. Great for parties.", img:"https://m.media-amazon.com/images/I/71nP16Y78wL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=floating+led+pool+lights+rechargeable" },
+
+      // SAFETY
+      { id:37, category:"Safety", brand:"D&D Technologies", name:"MagnaLatch Series 3 Top Pull Gate Latch", hook:"The original magnetic child-safety latch. Lifetime warranty, pool code standard in most states.", img:"https://m.media-amazon.com/images/I/71n1l5+YsDL._AC_SL1500_.jpg", pick:true, stars:0, reviews:null, url:"https://www.amazon.com/s?k=magnalatch+series+3" },
+      { id:38, category:"Safety", brand:"D&D Technologies", name:"D&D TruClose Self-Closing Gate Hinges (pair)", hook:"Self-closing is half the safety equation. Pair with MagnaLatch for a fully code-compliant gate.", img:"https://m.media-amazon.com/images/I/71YtaIbAKnL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=d%26d+truclose+gate+hinges" },
+      { id:39, category:"Safety", brand:"PoolGuard", name:"PoolGuard PGRM-2 In-Ground Pool Alarm", hook:"Detects waves from a child falling in. Sounds inside and outside. Meets ASTM F2208 standard.", img:"https://m.media-amazon.com/images/I/61l+DFd-SRL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=poolguard+pool+alarm" },
+      { id:40, category:"Safety", brand:"USCG-Approved", name:"Ring Buoy + Throw Rope — Poolside Safety Set", hook:"USCG-approved throw ring with 50' rope. Required by code for many commercial pools. Smart for home too.", img:"https://m.media-amazon.com/images/I/71rVG0HI+kL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=ring+buoy+throw+rope+pool" },
+
+      // SEASONAL
+      { id:41, category:"Seasonal", brand:"Aquapill / Gizzmo", name:"Skimmer Expansion Plug (Gizzmo)", hook:"Protects skimmer from freeze damage. One of the most important winterizing items and most overlooked.", img:"https://m.media-amazon.com/images/I/61uJp9sJIGL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=gizzmo+skimmer+plug" },
+      { id:42, category:"Seasonal", brand:"Various", name:"Rectangular Leaf Net Winter Cover", hook:"Keeps leaves off your pool cover all fall. Makes spring opening 10x faster.", img:"https://m.media-amazon.com/images/I/71m9z-0cMHL._AC_SL1500_.jpg", pick:false, stars:0, reviews:null, url:"https://www.amazon.com/s?k=pool+leaf+net+cover+rectangular" },
+    ];
+
+    // ─── STAR SVG ───
+    function starSVG(filled) {
+      const cls = filled ? 'star filled' : 'star';
+      return `<svg class="${cls}" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.77.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>`;
+    }
+
+    function starsHTML(rating) {
+      if (!rating) {
+        return `<div class="stars">${[1,2,3,4,5].map(()=>starSVG(false)).join('')}</div><span class="star-label">Rating pending</span>`;
+      }
+      const full = Math.floor(rating);
+      let html = '<div class="stars">';
+      for (let i = 1; i <= 5; i++) html += starSVG(i <= full);
+      html += '</div>';
+      return html;
+    }
+
+    // ─── RENDER CARDS ───
+    function renderProducts(list) {
+      const grid = document.getElementById('productGrid');
+      const count = document.getElementById('productsCount');
+      if (!list.length) {
+        grid.innerHTML = `<div class="no-results"><h3>No products found</h3><p>Try a different search or category.</p></div>`;
+        count.textContent = '0 products';
+        return;
+      }
+      count.textContent = `${list.length} product${list.length !== 1 ? 's' : ''}`;
+      grid.innerHTML = list.map(p => `
+        <div class="product-card" data-category="${p.category}" data-name="${p.name.toLowerCase()}" data-brand="${p.brand.toLowerCase()}">
+          <div class="product-img-wrap">
+            ${p.pick ? '<span class="pick-badge">⭐ PoolVibe Pick</span>' : ''}
+            <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="product-img-placeholder" style="display:none;">🏊</div>
+          </div>
+          <div class="product-body">
+            <span class="product-category-tag">${p.category}</span>
+            <span class="product-brand">${p.brand}</span>
+            <div class="product-name">${p.name}</div>
+            <p class="product-hook">${p.hook}</p>
+            <div class="star-row">
+              ${starsHTML(p.stars)}
+              ${p.reviews ? `<span class="star-label">${p.reviews} reviews</span>` : ''}
+            </div>
+          </div>
+          <div class="product-footer">
+            <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="btn-amazon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.39 17.35C3.5 15.46 1.5 12.37 1.5 9c0-5.8 4.7-10.5 10.5-10.5S22.5 3.2 22.5 9c0 3.37-2 6.46-4.89 8.35-.33.21-.75-.07-.68-.46l.5-2.74a.5.5 0 00-.26-.53C15.37 12.96 14 11.16 14 9c0-2.76 2.24-5 5-5 .28 0 .5.22.5.5s-.22.5-.5.5C17.12 5 15 7.12 15 9c0 1.87 1.24 3.48 3 4v.01l-.43 2.37C17.2 16.4 16.5 17 15.67 17c-.28 0-.55-.06-.8-.18C13.29 15.98 12 14.11 12 12c0 3.87-3.13 7-7 7-.55 0-1.09-.06-1.61-.18z"/></svg>
+              View on Amazon
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ─── FILTER STATE ───
+    let activeCategory = 'all';
+
+    function filterTab(btn, cat) {
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCategory = cat;
+      filterProducts();
+    }
+
+    function filterCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.filter-tab').forEach(b => {
+        b.classList.toggle('active', b.textContent.trim() === cat || (cat === 'all' && b.textContent.trim() === 'All Products'));
+      });
+      filterProducts();
+    }
+
+    function filterProducts() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = products.filter(p => {
+        const catMatch = activeCategory === 'all' || p.category === activeCategory;
+        const qMatch = !q || p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q) || p.hook.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+        return catMatch && qMatch;
+      });
+      renderProducts(filtered);
+    }
+
+    // ─── INIT ───
+    renderProducts(products);
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
