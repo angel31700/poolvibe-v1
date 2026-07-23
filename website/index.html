@@ -113,6 +113,16 @@
       z-index: 0;
     }
 
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+    }
+
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -747,6 +757,9 @@
   <!-- ─── HERO ─── -->
   <section id="hero">
     <div class="hero-bg"></div>
+    <video class="hero-video" autoplay muted loop playsinline poster="hero.jpg">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="hero-eyebrow reveal">Pool intelligence, finally.</span>
@@ -812,15 +825,15 @@
         <div class="step reveal">
           <div class="step-number">02</div>
           <div class="step-content">
-            <h3 class="step-heading">Enter your readings</h3>
-            <p class="step-body">Test strip values, visual symptoms, or upload a maintenance report. Takes 60 seconds. PoolVibe understands what it's looking at.</p>
+            <h3 class="step-heading">Take a photo of your test strip</h3>
+            <p class="step-body">Point your camera at your test strip. PoolVibe reads the colors, identifies what's off, and knows exactly what your water needs. Done in seconds.</p>
           </div>
         </div>
         <div class="step reveal">
           <div class="step-number">03</div>
           <div class="step-content">
-            <h3 class="step-heading">Get your exact action plan</h3>
-            <p class="step-body">Specific chemicals. Exact amounts. Right order. With timing notes so you don't waste what you just added. No more guesswork, no more re-treating.</p>
+            <h3 class="step-heading">Get your exact action plan — delivered</h3>
+            <p class="step-body">Specific chemicals. Exact amounts. Right order. Shop the recommended products directly in the app and get them shipped to your door. No store run required.</p>
           </div>
         </div>
         <div class="step reveal">
